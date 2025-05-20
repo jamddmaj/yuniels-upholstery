@@ -24,7 +24,6 @@
       width: 250px;
       padding: 8px;
       font-size: 16px;
-      box-sizing: border-box;
     }
     #searchButton {
       padding: 8px 12px;
@@ -88,7 +87,7 @@
   <div id="gallery"></div>
   <div id="noResults" style="display:none;">No se encontraron resultados</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
   <script>
     const boatsData = {
       "yellowfin42": [
@@ -153,7 +152,8 @@
       images.forEach(imgPath => {
         const link = document.createElement("a");
         link.href = imgPath;
-        link.setAttribute("data-lightbox", model.toLowerCase()); // Agrupar por modelo
+        link.setAttribute("data-lightbox", model.toLowerCase()); // agrupación por modelo
+        link.setAttribute("rel", "lightbox"); // extra por compatibilidad
         const img = document.createElement("img");
         img.src = imgPath;
         img.alt = model;
