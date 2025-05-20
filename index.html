@@ -10,6 +10,7 @@
       padding: 20px;
       background: #111;
       color: white;
+      margin-bottom: 100px;
     }
     h1 {
       margin-bottom: 10px;
@@ -73,6 +74,64 @@
       margin-top: 20px;
       color: gray;
     }
+
+    /* Flechas Lightbox personalizadas */
+    .lb-prev, .lb-next {
+      background: rgba(0, 0, 0, 0.5) !important;
+      border-radius: 50%;
+      width: 60px !important;
+      height: 60px !important;
+      top: 45% !important;
+      opacity: 1 !important;
+    }
+    .lb-prev::before, .lb-next::before {
+      font-size: 40px !important;
+      color: white !important;
+    }
+    .lb-prev:hover, .lb-next:hover {
+      background: rgba(255, 255, 255, 0.8) !important;
+    }
+    .lb-prev:hover::before, .lb-next:hover::before {
+      color: black !important;
+    }
+
+    /* Botones flotantes */
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .floating-buttons a {
+      background-color: #25d366;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    .floating-buttons a.instagram { background: #E4405F; }
+    .floating-buttons a.email { background: #0072c6; }
+
+    .footer {
+      text-align: center;
+      padding: 30px 0 10px;
+      font-size: 14px;
+      color: #888;
+      border-top: 1px solid #444;
+      margin-top: 60px;
+    }
   </style>
 </head>
 <body>
@@ -86,6 +145,18 @@
 
   <div id="gallery"></div>
   <div id="noResults" style="display:none;">No se encontraron resultados</div>
+
+  <!-- Botones flotantes -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/13055551234" target="_blank" title="WhatsApp">📱</a>
+    <a href="https://instagram.com/yunielsupholstery" target="_blank" class="instagram" title="Instagram">📷</a>
+    <a href="mailto:contacto@yunielsupholstery.com" class="email" title="Email">✉️</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
   <script>
@@ -152,8 +223,8 @@
       images.forEach(imgPath => {
         const link = document.createElement("a");
         link.href = imgPath;
-        link.setAttribute("data-lightbox", model.toLowerCase()); // agrupación por modelo
-        link.setAttribute("rel", "lightbox"); // extra por compatibilidad
+        link.setAttribute("data-lightbox", model.toLowerCase());
+        link.setAttribute("rel", "lightbox");
         const img = document.createElement("img");
         img.src = imgPath;
         img.alt = model;
