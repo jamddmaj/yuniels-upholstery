@@ -11,10 +11,17 @@
     h1 {
       margin-bottom: 10px;
     }
+    .search-container {
+      position: relative;
+      width: 300px;
+      display: flex;
+      align-items: center;
+    }
     #searchBox {
       width: 250px;
       padding: 8px;
       font-size: 16px;
+      box-sizing: border-box;
     }
     #searchButton {
       padding: 8px 12px;
@@ -26,9 +33,15 @@
       border: 1px solid #ccc;
       max-width: 300px;
       position: absolute;
-      background: white;
-      z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      top: 100%;
+      left: 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
       cursor: pointer;
+      max-height: 150px;
+      overflow-y: auto;
+      border-radius: 0 0 8px 8px;
     }
     #suggestions div {
       padding: 6px;
@@ -51,11 +64,6 @@
     #noResults {
       margin-top: 20px;
       color: gray;
-    }
-    .search-container {
-      position: relative;
-      display: flex;
-      align-items: center;
     }
   </style>
 </head>
