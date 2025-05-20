@@ -75,24 +75,31 @@
       color: gray;
     }
 
-    /* Flechas Lightbox personalizadas */
+    /* Botones de navegación del Lightbox personalizados */
     .lb-prev, .lb-next {
-      background: rgba(0, 0, 0, 0.5) !important;
-      border-radius: 50%;
-      width: 60px !important;
-      height: 60px !important;
-      top: 45% !important;
+      width: auto !important;
+      height: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6) !important;
+      padding: 12px 20px;
+      font-size: 18px;
+      color: white !important;
+      border-radius: 8px;
       opacity: 1 !important;
+      z-index: 10000;
     }
-    .lb-prev::before, .lb-next::before {
-      font-size: 40px !important;
+
+    .lb-prev::before {
+      content: "⟨ Anterior";
+      font-size: 18px !important;
       color: white !important;
     }
-    .lb-prev:hover, .lb-next:hover {
-      background: rgba(255, 255, 255, 0.8) !important;
-    }
-    .lb-prev:hover::before, .lb-next:hover::before {
-      color: black !important;
+
+    .lb-next::before {
+      content: "Siguiente ⟩";
+      font-size: 18px !important;
+      color: white !important;
     }
 
     /* Botones flotantes */
