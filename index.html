@@ -101,7 +101,7 @@
       }
       const valueLower = value.toLowerCase();
       const filtered = Object.keys(boatsData).filter(model =>
-        model.startsWith(valueLower)
+        model.toLowerCase().startsWith(valueLower)
       );
       if (filtered.length === 0) {
         suggestions.style.display = "none";
@@ -113,7 +113,7 @@
         div.addEventListener("click", () => {
           searchBox.value = model;
           suggestions.style.display = "none";
-          showImages(model);
+          showImages(model.toLowerCase());
         });
         suggestions.appendChild(div);
       });
@@ -152,7 +152,7 @@
     searchBox.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        const val = searchBox.value.trim();
+        const val = searchBox.value.trim().toLowerCase();
         if (val in boatsData) {
           showImages(val);
           suggestions.style.display = "none";
