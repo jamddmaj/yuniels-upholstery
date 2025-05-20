@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Yuniel'S Upholstery LLC - Galería</title>
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
+      background: #111;
+      color: white;
     }
     h1 {
       margin-bottom: 10px;
@@ -42,6 +45,7 @@
       max-height: 150px;
       overflow-y: auto;
       border-radius: 0 0 8px 8px;
+      color: black;
     }
     #suggestions div {
       padding: 6px;
@@ -51,15 +55,20 @@
       background: #f0f0f0;
     }
     #gallery {
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
     }
-    #gallery img {
-      max-width: 200px;
+    #gallery a img {
+      width: 100%;
+      height: auto;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+    #gallery a img:hover {
+      transform: scale(1.03);
     }
     #noResults {
       margin-top: 20px;
@@ -71,12 +80,7 @@
 
   <h1>Yuniel'S Upholstery LLC</h1>
   <div class="search-container">
-    <input
-      type="text"
-      id="searchBox"
-      placeholder="Buscar modelo de bote, ej: yellowfin42"
-      autocomplete="off"
-    />
+    <input type="text" id="searchBox" placeholder="Buscar modelo de bote, ej: yellowfin42" autocomplete="off" />
     <button id="searchButton">Buscar</button>
     <div id="suggestions" style="display:none;"></div>
   </div>
@@ -84,6 +88,7 @@
   <div id="gallery"></div>
   <div id="noResults" style="display:none;">No se encontraron resultados</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
   <script>
     const boatsData = {
       "yellowfin42": [
@@ -146,11 +151,15 @@
       }
 
       images.forEach(imgPath => {
+        const link = document.createElement("a");
+        link.href = imgPath;
+        link.setAttribute("data-lightbox", model);
         const img = document.createElement("img");
         img.src = imgPath;
         img.alt = model;
-        img.onerror = () => { img.style.display = "none"; }
-        gallery.appendChild(img);
+        img.onerror = () => { link.style.display = "none"; }
+        link.appendChild(img);
+        gallery.appendChild(link);
       });
     }
 
