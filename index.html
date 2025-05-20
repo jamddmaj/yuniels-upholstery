@@ -12,9 +12,15 @@
       margin-bottom: 10px;
     }
     #searchBox {
-      width: 300px;
+      width: 250px;
       padding: 8px;
       font-size: 16px;
+    }
+    #searchButton {
+      padding: 8px 12px;
+      font-size: 16px;
+      margin-left: 8px;
+      cursor: pointer;
     }
     #suggestions {
       border: 1px solid #ccc;
@@ -48,6 +54,8 @@
     }
     .search-container {
       position: relative;
+      display: flex;
+      align-items: center;
     }
   </style>
 </head>
@@ -61,6 +69,7 @@
       placeholder="Buscar modelo de bote, ej: yellowfin42"
       autocomplete="off"
     />
+    <button id="searchButton">Buscar</button>
     <div id="suggestions" style="display:none;"></div>
   </div>
 
@@ -68,7 +77,6 @@
   <div id="noResults" style="display:none;">No se encontraron resultados</div>
 
   <script>
-    // Datos con modelos y sus imágenes
     const boatsData = {
       "yellowfin42": [
         "gallery/yellowfin42/IMG20250403123239.heic"
@@ -88,11 +96,11 @@
     };
 
     const searchBox = document.getElementById("searchBox");
+    const searchButton = document.getElementById("searchButton");
     const suggestions = document.getElementById("suggestions");
     const gallery = document.getElementById("gallery");
     const noResults = document.getElementById("noResults");
 
-    // Función para mostrar sugerencias de autocomplete
     function showSuggestions(value) {
       suggestions.innerHTML = "";
       if (value.length === 0) {
@@ -113,14 +121,12 @@
         div.addEventListener("click", () => {
           searchBox.value = model;
           suggestions.style.display = "none";
-          showImages(model.toLowerCase());
         });
         suggestions.appendChild(div);
       });
       suggestions.style.display = "block";
     }
 
-    // Función para mostrar imágenes según modelo
     function showImages(model) {
       gallery.innerHTML = "";
       noResults.style.display = "none";
@@ -135,7 +141,7 @@
         const img = document.createElement("img");
         img.src = imgPath;
         img.alt = model;
-        img.onerror = () => { img.style.display = "none"; } // Oculta imagen si falla cargar
+        img.onerror = () => { img.style.display = "none"; }
         gallery.appendChild(img);
       });
     }
@@ -143,28 +149,21 @@
     searchBox.addEventListener("input", () => {
       const value = searchBox.value.trim();
       showSuggestions(value);
-      if (value.length === 0) {
+      // No borrar galería aquí, para que solo se actualice con botón
+    });
+
+    searchButton.addEventListener("click", () => {
+      const val = searchBox.value.trim().toLowerCase();
+      if (val in boatsData) {
+        showImages(val);
+        suggestions.style.display = "none";
+      } else {
         gallery.innerHTML = "";
-        noResults.style.display = "none";
+        noResults.style.display = "block";
+        suggestions.style.display = "none";
       }
     });
 
-    searchBox.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        const val = searchBox.value.trim().toLowerCase();
-        if (val in boatsData) {
-          showImages(val);
-          suggestions.style.display = "none";
-        } else {
-          gallery.innerHTML = "";
-          noResults.style.display = "block";
-          suggestions.style.display = "none";
-        }
-      }
-    });
-
-    // Cerrar sugerencias al hacer click fuera
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".search-container")) {
         suggestions.style.display = "none";
