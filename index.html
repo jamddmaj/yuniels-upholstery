@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yuniel'S Upholstery LLC - Galería</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    #searchBox {
+      width: 300px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    #gallery {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    #gallery img {
+      max-width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    #noResults {
+      margin-top: 20px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Yuniel'S Upholstery LLC</h1>
+  <input
+    type="text"
+    id="searchBox"
+    placeholder="Buscar modelo de bote, ej: yellowfin42"
+  />
+
+  <div id="gallery"></div>
+  <div id="noResults" style="display:none;">No se encontraron resultados</div>
+
+  <script>
+    // Aquí defines los modelos y las imágenes que hay en cada uno
+    const boatsData = {
+      "yellowfin42": [
+        "gallery/yellowfin42/IMG20250403123239.heic",
+        // agrega aquí los nombres de tus otras imágenes en yellowfin42
+      ],
+      // más modelos en el futuro
+    };
+
+    const searchBox = document.getElementById("searchBox");
+    const gallery = document.getElementById("gallery");
+    const noResults = document.getElementById("noResults");
+
+    function showImages(model) {
+      gallery.innerHTML = "";
+      noResults.style.display = "none";
+
+      if (!boatsData[model]) {
+        noResults.style.display = "block";
+        return;
+      }
+
+      boatsData[model].forEach((imgPath) => {
+        const img = document.createElement("img");
+        img.src = imgPath;
+        img.alt = model;
+        gallery.appendChild(img);
+      });
+    }
+
+    searchBox.addEventListener("input", () => {
+      const query = searchBox.value.trim().toLowerCase();
+      if (query.length === 0) {
+        gallery.innerHTML = "";
+        noResults.style.display = "none";
+        return;
+      }
+      showImages(query);
+    });
+  </script>
+
+</body>
+</html>
