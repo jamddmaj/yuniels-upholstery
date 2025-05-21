@@ -143,7 +143,6 @@
       letter-spacing: 1px;
       background: none;
     }
-
     /* Botones de Lightbox personalizados */
     .lb-prev, .lb-next {
       width: auto !important;
@@ -170,21 +169,56 @@
     .lb-prev { left: 20px !important; }
     .lb-next { right: 20px !important; }
     .lb-prev::before {
-      content: \"⟨ Anterior\";
+      content: "⟨ Anterior";
       font-size: 1.25rem !important;
       font-weight: bold;
       color: #fff;
       margin-right: 6px;
     }
     .lb-next::before {
-      content: \"Siguiente ⟩\";
+      content: "Siguiente ⟩";
       font-size: 1.25rem !important;
       font-weight: bold;
       color: #fff;
       margin-left: 6px;
     }
-    /* Para que no se tapen los thumbnails */
     .lb-outerContainer, .lb-container { background: #10141be0 !important; }
+    /* Botones sociales flotantes */
+    .social-float {
+      position: fixed;
+      right: 20px;
+      bottom: 86px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 2222;
+    }
+    .social-float a {
+      display: block;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 12px #0006;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s, transform 0.13s;
+    }
+    .social-float a:hover {
+      box-shadow: 0 8px 24px #2ab7ca99;
+      transform: scale(1.11);
+    }
+    .social-float img {
+      width: 34px;
+      height: 34px;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .social-float { right: 6px; bottom: 68px; gap: 13px; }
+      .social-float a { width: 42px; height: 42px; }
+      .social-float img { width: 26px; height: 26px; }
+    }
   </style>
 </head>
 <body>
@@ -204,6 +238,22 @@
 <div id="gallery"></div>
 <div class="footer" id="footerText">
   © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+</div>
+
+<!-- Botones sociales de color flotantes -->
+<div class="social-float">
+  <a href="https://instagram.com/TU_USUARIO" target="_blank" title="Instagram">
+    <img src="icons/instagram.png" alt="Instagram" />
+  </a>
+  <a href="https://wa.me/1TUNUMERO" target="_blank" title="WhatsApp">
+    <img src="icons/whatsapp.png" alt="WhatsApp" />
+  </a>
+  <a href="mailto:TUEMAIL@gmail.com" title="Correo">
+    <img src="icons/twitter.png" alt="Correo" /> <!-- Cambia por un sobre si prefieres -->
+  </a>
+  <a href="https://facebook.com/TU_USUARIO" target="_blank" title="Facebook">
+    <img src="icons/facebook.png" alt="Facebook" />
+  </a>
 </div>
 
 <script>
