@@ -6,86 +6,185 @@
   <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       padding: 20px;
-      background: #111;
-      color: white;
+      background: #10141b;
+      color: #fff;
       margin-bottom: 100px;
+      min-height: 100vh;
     }
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 2.1rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 6px #0009;
     }
     .search-container {
-      position: relative;
-      width: 300px;
       display: flex;
       align-items: center;
+      gap: 10px;
+      max-width: 600px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 10;
     }
     #searchBox {
-      width: 250px;
-      padding: 8px;
-      font-size: 16px;
+      width: 220px;
+      padding: 11px 12px;
+      font-size: 17px;
+      border-radius: 6px;
+      border: none;
+      box-shadow: 0 2px 6px #0004;
+      outline: none;
+      background: #232833;
+      color: #fff;
     }
     #searchButton {
-      padding: 8px 12px;
-      font-size: 16px;
-      margin-left: 8px;
+      padding: 11px 20px;
+      font-size: 17px;
+      border: none;
+      border-radius: 6px;
+      background: #2ab7ca;
+      color: #fff;
+      font-weight: bold;
+      letter-spacing: 1px;
       cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 6px #0004;
+    }
+    #searchButton:hover {
+      background: #227c8e;
     }
     #languageSwitcher {
-      position: absolute;
-      top: 0;
-      right: -150px;
-      background: #222;
-      border: 1px solid #555;
-      padding: 6px;
-      border-radius: 4px;
-      color: white;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: none;
+      background: #222b3a;
+      color: #fff;
+      margin-left: 12px;
+      font-size: 17px;
+      box-shadow: 0 2px 6px #0004;
+      cursor: pointer;
     }
     #suggestions {
       position: absolute;
-      top: 100%;
       left: 0;
-      width: 100%;
-      background: #222;
-      color: white;
-      border: 1px solid #444;
+      top: 46px;
+      width: 220px;
+      background: #21242c;
+      color: #fff;
+      border: 1px solid #38445a;
       border-top: none;
-      max-height: 200px;
+      max-height: 220px;
       overflow-y: auto;
-      z-index: 1000;
+      z-index: 1001;
+      border-radius: 0 0 9px 9px;
+      box-shadow: 0 4px 14px #0007;
+      animation: fadeIn 0.18s;
     }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     #suggestions div {
-      padding: 10px;
+      padding: 13px 14px;
+      font-size: 16px;
       cursor: pointer;
+      border-bottom: 1px solid #242b37;
+      transition: background 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #suggestions div:last-child {
+      border-bottom: none;
     }
     #suggestions div:hover {
-      background: #444;
+      background: #334058;
+      color: #fff;
     }
     #gallery {
-      margin-top: 30px;
+      margin-top: 36px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 24px;
+      padding-bottom: 48px;
+    }
+    #gallery a {
+      background: #232943;
+      border-radius: 13px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px #0007;
+      transition: box-shadow 0.2s, transform 0.16s;
+      display: block;
+    }
+    #gallery a:hover {
+      box-shadow: 0 6px 32px #222c, 0 0px 0px #fff0;
+      transform: translateY(-4px) scale(1.045);
     }
     #gallery a img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      transition: transform 0.3s;
+      display: block;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+      will-change: transform;
+      border-bottom: 2px solid #2ab7ca33;
+      background: #222;
     }
     #gallery a img:hover {
-      transform: scale(1.03);
+      transform: scale(1.04) rotate(-1deg);
     }
     .footer {
       text-align: center;
-      padding: 30px 0 10px;
-      font-size: 14px;
-      color: #888;
-      border-top: 1px solid #444;
-      margin-top: 60px;
+      padding: 36px 0 12px;
+      font-size: 15px;
+      color: #9ba3b7;
+      border-top: 1px solid #2ab7ca55;
+      margin-top: 64px;
+      letter-spacing: 1px;
+      background: none;
     }
+
+    /* Botones de Lightbox personalizados */
+    .lb-prev, .lb-next {
+      width: auto !important;
+      height: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%);
+      background: #2ab7ca;
+      color: #fff !important;
+      padding: 16px 26px;
+      font-size: 2.1rem !important;
+      font-weight: bold;
+      border-radius: 16px;
+      opacity: 0.97 !important;
+      z-index: 10000;
+      position: fixed !important;
+      box-shadow: 0 2px 16px #000c;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .lb-prev { left: 20px !important; }
+    .lb-next { right: 20px !important; }
+    .lb-prev::before {
+      content: \"⟨ Anterior\";
+      font-size: 1.25rem !important;
+      font-weight: bold;
+      color: #fff;
+      margin-right: 6px;
+    }
+    .lb-next::before {
+      content: \"Siguiente ⟩\";
+      font-size: 1.25rem !important;
+      font-weight: bold;
+      color: #fff;
+      margin-left: 6px;
+    }
+    /* Para que no se tapen los thumbnails */
+    .lb-outerContainer, .lb-container { background: #10141be0 !important; }
   </style>
 </head>
 <body>
@@ -168,7 +267,7 @@
     const filtered = allOptions.filter(v => v.toLowerCase().includes(val));
     filtered.forEach(item => {
       const div = document.createElement("div");
-      div.textContent = item;
+      div.innerHTML = `<span style='font-size:20px;opacity:.6'>🔎</span> <span>${item}</span>`;
       div.onclick = () => {
         searchBox.value = item;
         suggestions.innerHTML = "";
@@ -189,6 +288,7 @@
       a.setAttribute("data-lightbox", lower);
       const img = document.createElement("img");
       img.src = path;
+      img.loading = "lazy";
       a.appendChild(img);
       gallery.appendChild(a);
     });
