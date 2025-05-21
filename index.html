@@ -32,27 +32,35 @@
       margin-left: 8px;
       cursor: pointer;
     }
-    #suggestions {
-      border: 1px solid #ccc;
-      max-width: 300px;
+    #languageSwitcher {
       position: absolute;
-      background: rgba(255, 255, 255, 0.95);
+      top: 0;
+      right: -150px;
+      background: #222;
+      border: 1px solid #555;
+      padding: 6px;
+      border-radius: 4px;
+      color: white;
+    }
+    #suggestions {
+      position: absolute;
       top: 100%;
       left: 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      z-index: 1000;
-      cursor: pointer;
-      max-height: 150px;
+      width: 100%;
+      background: #222;
+      color: white;
+      border: 1px solid #444;
+      border-top: none;
+      max-height: 200px;
       overflow-y: auto;
-      border-radius: 0 0 8px 8px;
-      color: black;
+      z-index: 1000;
     }
     #suggestions div {
-      padding: 6px;
-      border-bottom: 1px solid #eee;
+      padding: 10px;
+      cursor: pointer;
     }
     #suggestions div:hover {
-      background: #f0f0f0;
+      background: #444;
     }
     #gallery {
       margin-top: 30px;
@@ -70,67 +78,6 @@
     #gallery a img:hover {
       transform: scale(1.03);
     }
-    #noResults {
-      margin-top: 20px;
-      color: gray;
-    }
-
-    /* Botones de navegación del Lightbox personalizados */
-    .lb-prev, .lb-next {
-      width: auto !important;
-      height: auto !important;
-      top: 50% !important;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6) !important;
-      padding: 12px 20px;
-      font-size: 18px;
-      color: white !important;
-      border-radius: 8px;
-      opacity: 1 !important;
-      z-index: 10000;
-    }
-
-    .lb-prev::before {
-      content: "⟨ Anterior";
-      font-size: 18px !important;
-      color: white !important;
-    }
-
-    .lb-next::before {
-      content: "Siguiente ⟩";
-      font-size: 18px !important;
-      color: white !important;
-    }
-
-    /* Botones flotantes */
-    .floating-buttons {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 999;
-    }
-    .floating-buttons a {
-      background-color: #25d366;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      transition: background 0.3s;
-    }
-    .floating-buttons a.instagram { background: #E4405F; }
-    .floating-buttons a.email { background: #0072c6; }
-
     .footer {
       text-align: center;
       padding: 30px 0 10px;
@@ -143,127 +90,136 @@
 </head>
 <body>
 
-  <h1>Yuniel'S Upholstery LLC</h1>
-  <div class="search-container">
-    <input type="text" id="searchBox" placeholder="Buscar modelo de bote, ej: yellowfin42" autocomplete="off" />
-    <button id="searchButton">Buscar</button>
-    <div id="suggestions" style="display:none;"></div>
-  </div>
+<h1 id="pageTitle">Yuniel'S Upholstery LLC</h1>
+<div class="search-container">
+  <input type="text" id="searchBox" placeholder="Buscar modelo..." autocomplete="off" />
+  <button id="searchButton">Buscar</button>
+  <select id="languageSwitcher">
+    <option value="es">Español</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="pt">Português</option>
+  </select>
+  <div id="suggestions"></div>
+</div>
+<div id="gallery"></div>
+<div class="footer" id="footerText">
+  © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+</div>
 
-  <div id="gallery"></div>
-  <div id="noResults" style="display:none;">No se encontraron resultados</div>
+<script>
+  const translations = {
+    es: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Buscar modelo...",
+      search: "Buscar",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados."
+    },
+    en: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Search model...",
+      search: "Search",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. All rights reserved."
+    },
+    fr: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Rechercher un modèle...",
+      search: "Rechercher",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Tous droits réservés."
+    },
+    pt: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Buscar modelo...",
+      search: "Buscar",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos os direitos reservados."
+    }
+  };
 
-  <!-- Botones flotantes -->
-  <div class="floating-buttons">
-    <a href="https://wa.me/13055551234" target="_blank" title="WhatsApp">📱</a>
-    <a href="https://instagram.com/yunielsupholstery" target="_blank" class="instagram" title="Instagram">📷</a>
-    <a href="mailto:contacto@yunielsupholstery.com" class="email" title="Email">✉️</a>
-  </div>
+  const boatsData = {
+    "yellowfin42": ["gallery/yellowfin42/IMG20250403123239.heic"],
+    "northtech": [
+      "gallery/northtech/IMG-20250226-WA0023.jpg",
+      "gallery/northtech/IMG-20250226-WA0024.jpg"
+    ]
+  };
 
-  <!-- Footer -->
-  <div class="footer">
-    © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
-  </div>
+  const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  const suggestions = document.getElementById("suggestions");
+  const gallery = document.getElementById("gallery");
+  const languageSwitcher = document.getElementById("languageSwitcher");
 
-  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
-  <script>
-    const boatsData = {
-      "yellowfin42": [
-        "gallery/yellowfin42/IMG20250403123239.heic"
-      ],
-      "northtech": [
-        "gallery/northtech/IMG-20250226-WA0023.jpg",
-        "gallery/northtech/IMG-20250226-WA0024.jpg",
-        "gallery/northtech/IMG-20250226-WA0026.jpg",
-        "gallery/northtech/IMG-20250226-WA0027.jpg",
-        "gallery/northtech/IMG-20250226-WA0028.jpg",
-        "gallery/northtech/IMG-20250226-WA0029.jpg",
-        "gallery/northtech/IMG-20250226-WA0030.jpg",
-        "gallery/northtech/IMG-20250226-WA0031.jpg",
-        "gallery/northtech/IMG-20250226-WA0032.jpg",
-        "gallery/northtech/IMG-20250226-WA0033.jpg"
-      ]
-    };
+  function updateSuggestions(value) {
+    suggestions.innerHTML = "";
+    if (!value) return;
+    const val = value.toLowerCase();
+    const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    const allOptions = [...new Set([...storedHistory, ...Object.keys(boatsData)])];
+    const filtered = allOptions.filter(v => v.toLowerCase().includes(val));
+    filtered.forEach(item => {
+      const div = document.createElement("div");
+      div.textContent = item;
+      div.onclick = () => {
+        searchBox.value = item;
+        suggestions.innerHTML = "";
+      };
+      suggestions.appendChild(div);
+    });
+  }
 
-    const searchBox = document.getElementById("searchBox");
-    const searchButton = document.getElementById("searchButton");
-    const suggestions = document.getElementById("suggestions");
-    const gallery = document.getElementById("gallery");
-    const noResults = document.getElementById("noResults");
+  function searchBoat(model) {
+    gallery.innerHTML = "";
+    const lower = model.toLowerCase();
+    const images = boatsData[lower];
+    if (!images) return;
 
-    function showSuggestions(value) {
+    images.forEach(path => {
+      const a = document.createElement("a");
+      a.href = path;
+      a.setAttribute("data-lightbox", lower);
+      const img = document.createElement("img");
+      img.src = path;
+      a.appendChild(img);
+      gallery.appendChild(a);
+    });
+
+    let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    if (!history.includes(lower)) {
+      history.unshift(lower);
+      localStorage.setItem("searchHistory", JSON.stringify(history.slice(0, 10)));
+    }
+  }
+
+  searchBox.addEventListener("input", (e) => {
+    updateSuggestions(e.target.value);
+  });
+
+  searchButton.onclick = () => {
+    const model = searchBox.value.trim();
+    if (model) {
       suggestions.innerHTML = "";
-      if (value.length === 0) {
-        suggestions.style.display = "none";
-        return;
-      }
-      const valueLower = value.toLowerCase();
-      const filtered = Object.keys(boatsData).filter(model =>
-        model.toLowerCase().startsWith(valueLower)
-      );
-      if (filtered.length === 0) {
-        suggestions.style.display = "none";
-        return;
-      }
-      filtered.forEach(model => {
-        const div = document.createElement("div");
-        div.textContent = model;
-        div.addEventListener("click", () => {
-          searchBox.value = model;
-          suggestions.style.display = "none";
-        });
-        suggestions.appendChild(div);
-      });
-      suggestions.style.display = "block";
+      searchBoat(model);
     }
+  };
 
-    function showImages(model) {
-      gallery.innerHTML = "";
-      noResults.style.display = "none";
+  function applyLanguage(lang) {
+    const t = translations[lang] || translations["es"];
+    document.getElementById("pageTitle").innerText = t.title;
+    searchBox.placeholder = t.placeholder;
+    searchButton.innerText = t.search;
+    document.getElementById("footerText").innerText = t.reserved;
+  }
 
-      const images = boatsData[model];
-      if (!images || images.length === 0) {
-        noResults.style.display = "block";
-        return;
-      }
+  languageSwitcher.addEventListener("change", () => {
+    const lang = languageSwitcher.value;
+    localStorage.setItem("preferredLanguage", lang);
+    applyLanguage(lang);
+  });
 
-      images.forEach(imgPath => {
-        const link = document.createElement("a");
-        link.href = imgPath;
-        link.setAttribute("data-lightbox", model.toLowerCase());
-        link.setAttribute("rel", "lightbox");
-        const img = document.createElement("img");
-        img.src = imgPath;
-        img.alt = model;
-        img.onerror = () => { link.style.display = "none"; }
-        link.appendChild(img);
-        gallery.appendChild(link);
-      });
-    }
-
-    searchBox.addEventListener("input", () => {
-      const value = searchBox.value.trim();
-      showSuggestions(value);
-    });
-
-    searchButton.addEventListener("click", () => {
-      const val = searchBox.value.trim().toLowerCase();
-      if (val in boatsData) {
-        showImages(val);
-        suggestions.style.display = "none";
-      } else {
-        gallery.innerHTML = "";
-        noResults.style.display = "block";
-        suggestions.style.display = "none";
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-container")) {
-        suggestions.style.display = "none";
-      }
-    });
-  </script>
-
+  const savedLang = localStorage.getItem("preferredLanguage") || "es";
+  languageSwitcher.value = savedLang;
+  applyLanguage(savedLang);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
 </body>
 </html>
