@@ -2,24 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Menú Demo</title>
+  <title>Yuniel'S Upholstery LLC</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
-    body { margin: 0; background: #10141b; color: #fff; font-family: Arial,sans-serif; min-height: 100vh;}
+    body {
+      margin: 0;
+      background: #10141b;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+    /* Menú hamburguesa */
     .menu-btn {
-      position: fixed; top: 24px; left: 24px; z-index: 3002;
+      position: fixed; top: 22px; left: 22px; z-index: 3002;
       background: none; border: none; cursor: pointer; outline: none;
       display: flex; flex-direction: column; gap: 6px;
+      /* Mejor contraste */
     }
     .menu-btn span {
       display: block; width: 34px; height: 5px;
-      background: #fff; border-radius: 3px; transition: .4s;
+      background: #2ab7ca; /* cyan brillante */
+      border-radius: 3px;
+      transition: .3s;
     }
+    /* Sidebar */
     .sidebar {
       position: fixed; top: 0; left: 0; bottom: 0; width: 250px;
-      background: #171c25; box-shadow: 4px 0 30px #000c;
+      background: #18202a;
+      box-shadow: 4px 0 30px #000c;
       padding-top: 70px; z-index: 3001;
       transform: translateX(-100%);
-      transition: transform .35s cubic-bezier(.71,-0.01,.39,1.01);
+      transition: transform .32s cubic-bezier(.71,-0.01,.39,1.01);
       overflow-y: auto;
       border-right: 2px solid #2ab7ca55;
     }
@@ -32,69 +45,326 @@
     }
     .accordion.active, .accordion:hover { background: #2ab7ca22;}
     .panel {
-      padding: 0 0 0 22px; display: none; background: #21242e; border-bottom: 1px solid #262d3e;
+      padding: 0 0 0 22px; display: none; background: #232a39; border-bottom: 1px solid #222b3a;
     }
     .panel a { display: block; padding: 10px 0; color: #b6eaff; text-decoration: none; font-size: 16px;}
     .panel a:hover { color: #2ab7ca;}
     .close-sidebar {
       position: absolute; top: 22px; right: 22px;
-      background: #222b3a; color: #fff; border: none; border-radius: 50%;
+      background: #2ab7ca; color: #fff; border: none; border-radius: 50%;
       width: 34px; height: 34px; font-size: 21px; cursor: pointer; box-shadow: 0 2px 10px #0006;
+      font-weight: bold;
     }
-    .close-sidebar:hover { background: #2ab7ca;}
+    .close-sidebar:hover { background: #1a7d8c;}
+    /* Main container */
+    .main-content {
+      max-width: 980px; margin: 0 auto; padding: 0 8px;
+      padding-top: 64px;
+    }
+    /* Título */
+    .title {
+      font-size: 2.1em;
+      margin: 32px 0 18px 0;
+      font-weight: bold;
+      color: #2ab7ca;
+      letter-spacing: 1px;
+    }
+    /* Buscador */
+    .search-row {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .search-row input[type="text"] {
+      padding: 10px 14px; border: none; border-radius: 6px 0 0 6px;
+      background: #232a39; color: #fff; font-size: 1em; width: 200px;
+      outline: none;
+    }
+    .search-row button {
+      padding: 10px 18px;
+      background: #2ab7ca; border: none; color: #fff; font-weight: bold;
+      border-radius: 0 6px 6px 0; cursor: pointer; font-size: 1em; letter-spacing: 1px;
+      transition: background .2s;
+    }
+    .search-row button:hover { background: #1a7d8c;}
+    .search-row select {
+      margin-left: 12px;
+      background: #232a39; color: #fff; border: none; border-radius: 6px; padding: 10px;
+      font-size: 1em;
+    }
+    /* Sugerencias */
+    .suggestions-list {
+      background: #232a39;
+      color: #b6eaff;
+      position: absolute;
+      z-index: 30;
+      margin-top: 2px;
+      width: 200px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 26px #0006;
+      font-size: 0.98em;
+      opacity: 0.97;
+    }
+    .suggestion-item {
+      padding: 7px 13px;
+      cursor: pointer;
+    }
+    .suggestion-item:hover {
+      background: #2ab7ca44;
+      color: #2ab7ca;
+    }
+    /* Galería */
+    .gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-start;
+    }
+    .gallery-img {
+      background: #181c22;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #0009;
+      width: 140px; height: 140px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform .18s, box-shadow .18s;
+      border: 2px solid #232a39;
+    }
+    .gallery-img:hover {
+      transform: scale(1.045);
+      box-shadow: 0 4px 28px #2ab7ca88;
+      border-color: #2ab7ca;
+    }
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #10141bdd;
+      z-index: 4002;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      transition: background .25s;
+    }
+    .lightbox.open { display: flex;}
+    .lightbox-img-wrapper {
+      position: relative;
+      width: 90vw; max-width: 560px;
+      max-height: 84vh;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .lightbox-img {
+      max-width: 100%; max-height: 82vh;
+      border-radius: 15px;
+      box-shadow: 0 2px 32px #2ab7ca55;
+      border: 2px solid #232a39;
+      background: #181c22;
+    }
+    .lightbox-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: #2ab7ca; color: #fff; border: none; border-radius: 50%;
+      width: 50px; height: 50px; font-size: 1.5em; font-weight: bold;
+      box-shadow: 0 2px 12px #0009;
+      cursor: pointer; opacity: 0.94; z-index: 1;
+      transition: background .15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-btn:hover { background: #2aeae4; color: #171c25;}
+    .lightbox-btn.prev { left: -60px;}
+    .lightbox-btn.next { right: -60px;}
+    .lightbox-close {
+      position: absolute; top: 12px; right: 12px;
+      background: #222b3a; color: #fff; border: none; border-radius: 50%;
+      width: 38px; height: 38px; font-size: 1.2em; cursor: pointer; z-index: 2;
+      box-shadow: 0 2px 10px #0006;
+      opacity: .82; transition: background .18s;
+    }
+    .lightbox-close:hover { background: #e84949; color: #fff; opacity: 1;}
+    .lightbox-counter {
+      color: #b6eaff; font-size: 0.98em; margin-top: 7px;
+      letter-spacing: 0.8px;
+    }
+    /* Redes Sociales */
+    .social-fab {
+      position: fixed; right: 16px; bottom: 22px; z-index: 3050;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .social-btn {
+      background: none;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 2px 12px #0005;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow .14s, transform .14s;
+    }
+    .social-btn img {
+      width: 50px; height: 50px; border-radius: 13px;
+      background: #fff;
+      box-shadow: 0 2px 12px #0004;
+      object-fit: cover;
+      border: 2px solid #2ab7ca;
+      transition: transform .16s;
+    }
+    .social-btn:hover img {
+      transform: scale(1.11);
+      box-shadow: 0 2px 18px #2ab7ca77;
+      border-color: #1a7d8c;
+    }
+    /* Copyright */
+    .copyright {
+      text-align: center; font-size: 0.98em; color: #b6eaff;
+      margin: 50px 0 16px 0;
+      letter-spacing: .7px;
+      opacity: 0.84;
+    }
+    @media (max-width: 700px) {
+      .main-content { padding: 0 2vw;}
+      .gallery-img { width: 48vw; max-width: 150px; height: 26vw; min-width: 100px;}
+      .lightbox-img-wrapper { max-width: 94vw;}
+      .lightbox-img { max-width: 94vw; max-height: 62vh;}
+      .lightbox-btn.prev { left: 0;}
+      .lightbox-btn.next { right: 0;}
+    }
+    @media (max-width: 400px) {
+      .search-row input[type="text"] { width: 98px;}
+      .suggestions-list { width: 97px;}
+    }
   </style>
 </head>
 <body>
 <!-- Botón Menú Hamburguesa -->
-<button class="menu-btn" id="menuBtn" aria-label="Menú">
+<button class="menu-btn" id="menuBtn" aria-label="Menú principal">
   <span></span>
   <span></span>
   <span></span>
 </button>
-<!-- Sidebar Menú -->
+<!-- Sidebar Menú Lateral -->
 <nav class="sidebar" id="sidebar">
   <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
   <h2>Modelos</h2>
   <button class="accordion">Northtech <span>▼</span></button>
   <div class="panel">
-    <a href="#">Northtech 38</a>
-    <a href="#">Northtech 45</a>
+    <a href="#" onclick="buscar('northtech')">Northtech 38</a>
+    <a href="#" onclick="buscar('northtech')">Northtech 45</a>
   </div>
   <button class="accordion">Yellowfin <span>▼</span></button>
   <div class="panel">
-    <a href="#">Yellowfin 42</a>
-    <a href="#">Yellowfin 36</a>
+    <a href="#" onclick="buscar('yellowfin42')">Yellowfin 42</a>
+    <a href="#" onclick="buscar('yellowfin36')">Yellowfin 36</a>
   </div>
 </nav>
+<div class="main-content">
+  <div class="title">Yuniel'S Upholstery LLC</div>
+  <form id="searchForm" class="search-row" autocomplete="off" style="position:relative;">
+    <input type="text" id="searchInput" placeholder="Buscar modelo..." />
+    <button type="submit">Buscar</button>
+    <select id="langSelect">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+    </select>
+    <div id="suggestions" class="suggestions-list" style="display:none;"></div>
+  </form>
+  <div id="gallery" class="gallery-grid"></div>
+  <div class="copyright">
+    © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+  </div>
+</div>
+<!-- Redes Sociales flotantes -->
+<div class="social-fab">
+  <button class="social-btn" onclick="window.open('https://wa.me/1XXXXXXXXXX', '_blank')" title="WhatsApp">
+    <img src="icons/whatsapp.png" alt="WhatsApp">
+  </button>
+  <button class="social-btn" onclick="window.open('https://instagram.com/TUUSUARIO', '_blank')" title="Instagram">
+    <img src="icons/instagram.png" alt="Instagram">
+  </button>
+  <button class="social-btn" onclick="window.open('https://x.com/TUUSUARIO', '_blank')" title="X (Twitter)">
+    <img src="icons/x.png" alt="X">
+  </button>
+  <button class="social-btn" onclick="window.open('https://facebook.com/TUUSUARIO', '_blank')" title="Facebook">
+    <img src="icons/facebook.png" alt="Facebook">
+  </button>
+</div>
+<!-- Lightbox para imágenes -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-img-wrapper">
+    <button class="lightbox-btn prev" id="lightboxPrev" aria-label="Anterior">&#8678; Anterior</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Foto de tapicería" />
+    <button class="lightbox-btn next" id="lightboxNext" aria-label="Siguiente">Siguiente &#8680;</button>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+  </div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
 <script>
-  // Botón abre/cierra menú
-  const sidebar = document.getElementById("sidebar");
-  const menuBtn = document.getElementById("menuBtn");
-  const closeSidebar = document.getElementById("closeSidebar");
-  menuBtn.onclick = () => sidebar.classList.add("open");
-  closeSidebar.onclick = () => sidebar.classList.remove("open");
-  // Cierra al hacer click fuera
-  window.onclick = e => {
-    if (sidebar.classList.contains('open') &&
-      !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
-      sidebar.classList.remove("open");
+/* Menú hamburguesa y acordeón */
+const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menuBtn");
+const closeSidebar = document.getElementById("closeSidebar");
+menuBtn.onclick = () => sidebar.classList.add("open");
+closeSidebar.onclick = () => sidebar.classList.remove("open");
+window.onclick = e => {
+  if (sidebar.classList.contains('open') &&
+    !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
+    sidebar.classList.remove("open");
+  }
+};
+const acc = document.getElementsByClassName("accordion");
+for(let i=0;i<acc.length;i++){
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    let panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+      this.querySelector("span").textContent = "▼";
+    } else {
+      panel.style.display = "block";
+      this.querySelector("span").textContent = "▲";
     }
   };
-  // Acordeón
-  const acc = document.getElementsByClassName("accordion");
-  for(let i=0;i<acc.length;i++){
-    acc[i].onclick = function() {
-      this.classList.toggle("active");
-      let panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-        this.querySelector("span").textContent = "▼";
-      } else {
-        panel.style.display = "block";
-        this.querySelector("span").textContent = "▲";
-      }
-    };
+}
+/* Datos de galería (puedes automatizar esto luego desde tus carpetas) */
+const galleryData = {
+  northtech: [
+    'gallery/northtech/IMG-20250226-WA0023.jpg',
+    'gallery/northtech/IMG-20250226-WA0024.jpg',
+    'gallery/northtech/IMG-20250226-WA0026.jpg',
+    'gallery/northtech/IMG-20250226-WA0027.jpg',
+    'gallery/northtech/IMG-20250226-WA0028.jpg',
+    'gallery/northtech/IMG-20250226-WA0029.jpg',
+    'gallery/northtech/IMG-20250226-WA0030.jpg',
+    'gallery/northtech/IMG-20250226-WA0031.jpg',
+    'gallery/northtech/IMG-20250226-WA0032.jpg',
+    'gallery/northtech/IMG-20250226-WA0033.jpg'
+  ],
+  yellowfin42: [
+    'gallery/yellowfin42/IMG20250403123239.heic'
+    // Agrega más imágenes aquí según subas
+  ],
+  yellowfin36: []
+};
+/* Sugerencias e historial */
+let suggestions = ["northtech", "yellowfin42", "yellowfin36"];
+let searchHistory = [];
+/* Galería dinámica */
+const galleryEl = document.getElementById('gallery');
+let currentImages = [], currentModel = '';
+function renderGallery(images) {
+  galleryEl.innerHTML = '';
+  if (!images.length) {
+    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
+    return;
   }
-</script>
-</body>
-</html>
+  images.forEach((img, i) => {
+    let el = document.createElement('img');
+    el.src = img;
+    el.className = "gallery-img";
+    el.alt = "Foto "+(i+1);
+    el.onclick = ()=>openLightbox(i);
+    galleryEl.appendChild(el);
+  });
+}
+/* Buscador */
+const searchInput
