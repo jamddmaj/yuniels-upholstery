@@ -7,30 +7,159 @@
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      padding: 20px;
+      padding: 0;
+      margin: 0;
       background: #10141b;
       color: #fff;
-      margin-bottom: 100px;
       min-height: 100vh;
+    }
+    .content-wrapper {
+      margin-left: 70px;
+      padding: 32px 24px 32px 24px;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 6px #0009;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 600px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 10;
+    }
+    #searchBox {
+      width: 180px;
+      padding: 10px 12px;
+      font-size: 17px;
+      border-radius: 6px;
+      border: none;
+      box-shadow: 0 2px 6px #0004;
+      outline: none;
+      background: #232833;
+      color: #fff;
+    }
+    #searchButton {
+      padding: 10px 18px;
+      font-size: 17px;
+      border: none;
+      border-radius: 6px;
+      background: #2ab7ca;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 6px #0004;
+    }
+    #searchButton:hover {
+      background: #227c8e;
+    }
+    #languageSwitcher {
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      background: #222b3a;
+      color: #fff;
+      font-size: 17px;
+      box-shadow: 0 2px 6px #0004;
+      cursor: pointer;
+    }
+    #suggestions {
+      position: absolute;
+      left: 0;
+      top: 40px;
+      width: 180px;
+      background: #21242c;
+      color: #fff;
+      border: 1px solid #38445a;
+      border-top: none;
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 1001;
+      border-radius: 0 0 9px 9px;
+      box-shadow: 0 4px 14px #0007;
+      animation: fadeIn 0.18s;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    #suggestions div {
+      padding: 11px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #242b37;
+      transition: background 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #suggestions div:last-child {
+      border-bottom: none;
+    }
+    #suggestions div:hover {
+      background: #334058;
+      color: #fff;
+    }
+    #gallery {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 22px;
+      padding-bottom: 48px;
+    }
+    #gallery a {
+      background: #232943;
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px #0007;
+      transition: box-shadow 0.2s, transform 0.16s;
+      display: block;
+    }
+    #gallery a img {
+      width: 100%;
+      display: block;
+      height: 170px;
+      object-fit: cover;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+      background: #222;
+    }
+    #gallery a:hover {
+      box-shadow: 0 6px 32px #222c;
+      transform: translateY(-3px) scale(1.04);
+    }
+    .footer {
+      text-align: center;
+      padding: 28px 0 12px;
+      font-size: 15px;
+      color: #9ba3b7;
+      border-top: 1px solid #2ab7ca55;
+      margin-top: 64px;
+      letter-spacing: 1px;
+      background: none;
     }
     /* --- MENÚ HAMBURGUESA --- */
     .menu-btn {
       position: fixed;
       top: 22px;
-      left: 22px;
+      left: 18px;
       z-index: 3002;
       background: none;
       border: none;
       cursor: pointer;
       outline: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 5px;
     }
     .menu-btn span {
       display: block;
-      width: 34px;
+      width: 31px;
       height: 5px;
-      margin: 5px 0;
       background: #fff;
       border-radius: 3px;
       transition: .4s;
@@ -38,7 +167,7 @@
     .sidebar {
       position: fixed;
       top: 0; left: 0; bottom: 0;
-      width: 260px;
+      width: 220px;
       background: #171c25;
       box-shadow: 4px 0 30px #000c;
       padding-top: 70px;
@@ -106,13 +235,7 @@
       transition: background .18s;
     }
     .close-sidebar:hover { background: #2ab7ca; }
-    @media (max-width: 600px) {
-      .sidebar { width: 82vw; min-width: 195px; }
-      .sidebar h2 { font-size: 16px; }
-    }
-    /*--- resto de tu css (galería, búsqueda, etc) ---*/
-    /* ... pega aquí el CSS del mensaje anterior ... */
-    /* --- Botones sociales flotantes personalizados --- */
+    /*--- Botones sociales flotantes ---*/
     .social-float {
       position: fixed;
       right: 20px;
@@ -144,6 +267,9 @@
       display: block;
     }
     @media (max-width: 600px) {
+      .content-wrapper { margin-left: 0; padding: 16px 4vw; }
+      .sidebar { width: 82vw; min-width: 160px; }
+      h1 { font-size: 1.2rem; }
       .social-float { right: 6px; bottom: 68px; gap: 13px; }
       .social-float a { width: 42px; height: 42px; }
       .social-float img { width: 26px; height: 26px; }
@@ -157,12 +283,10 @@
   <span></span>
   <span></span>
 </button>
-
 <!-- Sidebar Menú -->
 <nav class="sidebar" id="sidebar">
   <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
   <h2>Modelos</h2>
-  <!-- Ejemplo de marcas con modelos desplegables -->
   <button class="accordion">Northtech <span>▼</span></button>
   <div class="panel">
     <a href="#" onclick="showGallery('northtech'); return false;">Northtech 38</a>
@@ -174,26 +298,26 @@
     <a href="#" onclick="showGallery('yellowfin42'); return false;">Yellowfin 42</a>
     <a href="#" onclick="showGallery('yellowfin36'); return false;">Yellowfin 36</a>
   </div>
-  <!-- Agrega más marcas/modelos aquí -->
 </nav>
-
-<h1 id="pageTitle" style="margin-left: 60px;">Yuniel'S Upholstery LLC</h1>
-<div class="search-container" style="margin-left: 60px;">
-  <input type="text" id="searchBox" placeholder="Buscar modelo..." autocomplete="off" />
-  <button id="searchButton">Buscar</button>
-  <select id="languageSwitcher">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="pt">Português</option>
-  </select>
-  <div id="suggestions"></div>
+<!-- CONTENIDO PRINCIPAL -->
+<div class="content-wrapper">
+  <h1 id="pageTitle">Yuniel'S Upholstery LLC</h1>
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Buscar modelo..." autocomplete="off" />
+    <button id="searchButton">Buscar</button>
+    <select id="languageSwitcher">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="pt">Português</option>
+    </select>
+    <div id="suggestions"></div>
+  </div>
+  <div id="gallery"></div>
+  <div class="footer" id="footerText">
+    © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+  </div>
 </div>
-<div id="gallery" style="margin-left: 60px;"></div>
-<div class="footer" id="footerText">
-  © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
-</div>
-
 <!-- Botones sociales flotantes -->
 <div class="social-float">
   <a href="https://wa.me/1TUNUMERO" target="_blank" title="WhatsApp">
@@ -209,7 +333,6 @@
     <img src="icons/facebook.png" alt="Facebook" />
   </a>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
 <script>
   // Sidebar Menu
@@ -218,7 +341,6 @@
   const closeSidebar = document.getElementById("closeSidebar");
   menuBtn.onclick = () => sidebar.classList.add("open");
   closeSidebar.onclick = () => sidebar.classList.remove("open");
-  // Close on click outside
   window.onclick = e => {
     if (sidebar.classList.contains('open') &&
       !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
@@ -241,7 +363,35 @@
     };
   }
 
-  // --- INTEGRA tu galería JS aquí (boatsData, showGallery, búsqueda, etc) ---
+  // Traducciones
+  const translations = {
+    es: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Buscar modelo...",
+      search: "Buscar",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados."
+    },
+    en: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Search model...",
+      search: "Search",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. All rights reserved."
+    },
+    fr: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Rechercher un modèle...",
+      search: "Rechercher",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Tous droits réservés."
+    },
+    pt: {
+      title: "Yuniel'S Upholstery LLC",
+      placeholder: "Buscar modelo...",
+      search: "Buscar",
+      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos os direitos reservados."
+    }
+  };
+
+  // Galería de fotos por modelo
   const boatsData = {
     "yellowfin42": [
       "gallery/yellowfin42/IMG20250403123239.heic"
@@ -259,8 +409,10 @@
       "gallery/northtech/IMG-20250226-WA0033.jpg"
     ]
   };
+
   function showGallery(model) {
-    document.getElementById("gallery").innerHTML = "";
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
     const images = boatsData[model];
     if (!images) return;
     images.forEach(path => {
@@ -276,9 +428,37 @@
     sidebar.classList.remove("open");
   }
 
-  // Sugerencias, búsqueda y multiidioma igual que en la versión anterior...
-  // Puedes copiar y pegar la lógica del mensaje previo aquí sin problema
-  // ...
-</script>
-</body>
-</html>
+  // Sugerencias, historial, búsqueda y multiidioma
+  const searchBox = document.getElementById("searchBox");
+  const searchButton = document.getElementById("searchButton");
+  const suggestions = document.getElementById("suggestions");
+  const galleryDiv = document.getElementById("gallery");
+  const languageSwitcher = document.getElementById("languageSwitcher");
+
+  function updateSuggestions(value) {
+    suggestions.innerHTML = "";
+    if (!value) return;
+    const val = value.toLowerCase();
+    const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    const allOptions = [...new Set([...storedHistory, ...Object.keys(boatsData)])];
+    const filtered = allOptions.filter(v => v.toLowerCase().includes(val));
+    filtered.forEach(item => {
+      const div = document.createElement("div");
+      div.innerHTML = `<span style='font-size:20px;opacity:.6'>🔎</span> <span>${item}</span>`;
+      div.onclick = () => {
+        searchBox.value = item;
+        suggestions.innerHTML = "";
+      };
+      suggestions.appendChild(div);
+    });
+  }
+
+  function searchBoat(model) {
+    galleryDiv.innerHTML = "";
+    const lower = model.toLowerCase();
+    const images = boatsData[lower];
+    if (!images) return;
+    images.forEach(path => {
+      const a = document.createElement("a");
+      a.href = path;
+      a.setAttribute("data-lightbox",
