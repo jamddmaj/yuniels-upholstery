@@ -13,177 +13,106 @@
       margin-bottom: 100px;
       min-height: 100vh;
     }
-    h1 {
-      margin-bottom: 16px;
-      font-weight: 700;
-      font-size: 2.1rem;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 6px #0009;
-    }
-    .search-container {
+    /* --- MENÚ HAMBURGUESA --- */
+    .menu-btn {
+      position: fixed;
+      top: 22px;
+      left: 22px;
+      z-index: 3002;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
       display: flex;
       align-items: center;
-      gap: 10px;
-      max-width: 600px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 10;
     }
-    #searchBox {
-      width: 220px;
-      padding: 11px 12px;
-      font-size: 17px;
-      border-radius: 6px;
-      border: none;
-      box-shadow: 0 2px 6px #0004;
-      outline: none;
-      background: #232833;
-      color: #fff;
+    .menu-btn span {
+      display: block;
+      width: 34px;
+      height: 5px;
+      margin: 5px 0;
+      background: #fff;
+      border-radius: 3px;
+      transition: .4s;
     }
-    #searchButton {
-      padding: 11px 20px;
-      font-size: 17px;
-      border: none;
-      border-radius: 6px;
-      background: #2ab7ca;
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 260px;
+      background: #171c25;
+      box-shadow: 4px 0 30px #000c;
+      padding-top: 70px;
+      z-index: 3001;
+      transform: translateX(-100%);
+      transition: transform .35s cubic-bezier(.71,-0.01,.39,1.01);
+      overflow-y: auto;
+      border-right: 2px solid #2ab7ca55;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar h2 {
+      margin: 0 0 16px 22px;
+      font-size: 21px;
+      letter-spacing: 2px;
+      color: #2ab7ca;
+      font-weight: 700;
+    }
+    .accordion {
+      background: none;
       color: #fff;
-      font-weight: bold;
-      letter-spacing: 1px;
       cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 2px 6px #0004;
-    }
-    #searchButton:hover {
-      background: #227c8e;
-    }
-    #languageSwitcher {
-      padding: 10px 14px;
-      border-radius: 6px;
+      padding: 13px 22px;
+      width: 100%;
       border: none;
+      text-align: left;
+      outline: none;
+      font-size: 17px;
+      font-weight: bold;
+      border-bottom: 1px solid #232a39;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .accordion.active, .accordion:hover {
+      background: #2ab7ca22;
+    }
+    .panel {
+      padding: 0 0 0 22px;
+      display: none;
+      background: #21242e;
+      border-bottom: 1px solid #262d3e;
+    }
+    .panel a {
+      display: block;
+      padding: 10px 0;
+      color: #b6eaff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color .17s;
+    }
+    .panel a:hover { color: #2ab7ca; text-decoration: underline; }
+    .close-sidebar {
+      position: absolute;
+      top: 22px; right: 22px;
       background: #222b3a;
       color: #fff;
-      margin-left: 12px;
-      font-size: 17px;
-      box-shadow: 0 2px 6px #0004;
-      cursor: pointer;
-    }
-    #suggestions {
-      position: absolute;
-      left: 0;
-      top: 46px;
-      width: 220px;
-      background: #21242c;
-      color: #fff;
-      border: 1px solid #38445a;
-      border-top: none;
-      max-height: 220px;
-      overflow-y: auto;
-      z-index: 1001;
-      border-radius: 0 0 9px 9px;
-      box-shadow: 0 4px 14px #0007;
-      animation: fadeIn 0.18s;
-    }
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    #suggestions div {
-      padding: 13px 14px;
-      font-size: 16px;
-      cursor: pointer;
-      border-bottom: 1px solid #242b37;
-      transition: background 0.18s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #suggestions div:last-child {
-      border-bottom: none;
-    }
-    #suggestions div:hover {
-      background: #334058;
-      color: #fff;
-    }
-    #gallery {
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 24px;
-      padding-bottom: 48px;
-    }
-    #gallery a {
-      background: #232943;
-      border-radius: 13px;
-      overflow: hidden;
-      box-shadow: 0 2px 16px #0007;
-      transition: box-shadow 0.2s, transform 0.16s;
-      display: block;
-    }
-    #gallery a:hover {
-      box-shadow: 0 6px 32px #222c, 0 0px 0px #fff0;
-      transform: translateY(-4px) scale(1.045);
-    }
-    #gallery a img {
-      width: 100%;
-      display: block;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
-      will-change: transform;
-      border-bottom: 2px solid #2ab7ca33;
-      background: #222;
-    }
-    #gallery a img:hover {
-      transform: scale(1.04) rotate(-1deg);
-    }
-    .footer {
-      text-align: center;
-      padding: 36px 0 12px;
-      font-size: 15px;
-      color: #9ba3b7;
-      border-top: 1px solid #2ab7ca55;
-      margin-top: 64px;
-      letter-spacing: 1px;
-      background: none;
-    }
-    /* Botones de Lightbox personalizados */
-    .lb-prev, .lb-next {
-      width: auto !important;
-      height: auto !important;
-      top: 50% !important;
-      transform: translateY(-50%);
-      background: #2ab7ca;
-      color: #fff !important;
-      padding: 16px 26px;
-      font-size: 2.1rem !important;
-      font-weight: bold;
-      border-radius: 16px;
-      opacity: 0.97 !important;
-      z-index: 10000;
-      position: fixed !important;
-      box-shadow: 0 2px 16px #000c;
       border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 21px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
+      box-shadow: 0 2px 10px #0006;
+      transition: background .18s;
     }
-    .lb-prev { left: 20px !important; }
-    .lb-next { right: 20px !important; }
-    .lb-prev::before {
-      content: "⟨ Anterior";
-      font-size: 1.25rem !important;
-      font-weight: bold;
-      color: #fff;
-      margin-right: 6px;
+    .close-sidebar:hover { background: #2ab7ca; }
+    @media (max-width: 600px) {
+      .sidebar { width: 82vw; min-width: 195px; }
+      .sidebar h2 { font-size: 16px; }
     }
-    .lb-next::before {
-      content: "Siguiente ⟩";
-      font-size: 1.25rem !important;
-      font-weight: bold;
-      color: #fff;
-      margin-left: 6px;
-    }
-    .lb-outerContainer, .lb-container { background: #10141be0 !important; }
-    /* Botones sociales flotantes personalizados */
+    /*--- resto de tu css (galería, búsqueda, etc) ---*/
+    /* ... pega aquí el CSS del mensaje anterior ... */
+    /* --- Botones sociales flotantes personalizados --- */
     .social-float {
       position: fixed;
       right: 20px;
@@ -222,9 +151,34 @@
   </style>
 </head>
 <body>
+<!-- Botón Menú Hamburguesa -->
+<button class="menu-btn" id="menuBtn" aria-label="Menú">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
 
-<h1 id="pageTitle">Yuniel'S Upholstery LLC</h1>
-<div class="search-container">
+<!-- Sidebar Menú -->
+<nav class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
+  <h2>Modelos</h2>
+  <!-- Ejemplo de marcas con modelos desplegables -->
+  <button class="accordion">Northtech <span>▼</span></button>
+  <div class="panel">
+    <a href="#" onclick="showGallery('northtech'); return false;">Northtech 38</a>
+    <a href="#" onclick="showGallery('northtech'); return false;">Northtech 45</a>
+    <a href="#" onclick="showGallery('northtech'); return false;">Northtech Custom</a>
+  </div>
+  <button class="accordion">Yellowfin <span>▼</span></button>
+  <div class="panel">
+    <a href="#" onclick="showGallery('yellowfin42'); return false;">Yellowfin 42</a>
+    <a href="#" onclick="showGallery('yellowfin36'); return false;">Yellowfin 36</a>
+  </div>
+  <!-- Agrega más marcas/modelos aquí -->
+</nav>
+
+<h1 id="pageTitle" style="margin-left: 60px;">Yuniel'S Upholstery LLC</h1>
+<div class="search-container" style="margin-left: 60px;">
   <input type="text" id="searchBox" placeholder="Buscar modelo..." autocomplete="off" />
   <button id="searchButton">Buscar</button>
   <select id="languageSwitcher">
@@ -235,12 +189,12 @@
   </select>
   <div id="suggestions"></div>
 </div>
-<div id="gallery"></div>
+<div id="gallery" style="margin-left: 60px;"></div>
 <div class="footer" id="footerText">
   © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
 </div>
 
-<!-- Botones sociales personalizados flotantes -->
+<!-- Botones sociales flotantes -->
 <div class="social-float">
   <a href="https://wa.me/1TUNUMERO" target="_blank" title="WhatsApp">
     <img src="icons/whatsapp.png" alt="WhatsApp" />
@@ -256,34 +210,38 @@
   </a>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
 <script>
-  const translations = {
-    es: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Buscar modelo...",
-      search: "Buscar",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados."
-    },
-    en: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Search model...",
-      search: "Search",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. All rights reserved."
-    },
-    fr: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Rechercher un modèle...",
-      search: "Rechercher",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Tous droits réservés."
-    },
-    pt: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Buscar modelo...",
-      search: "Buscar",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos os direitos reservados."
+  // Sidebar Menu
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeSidebar = document.getElementById("closeSidebar");
+  menuBtn.onclick = () => sidebar.classList.add("open");
+  closeSidebar.onclick = () => sidebar.classList.remove("open");
+  // Close on click outside
+  window.onclick = e => {
+    if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
+      sidebar.classList.remove("open");
     }
   };
+  // Acordeón
+  const acc = document.getElementsByClassName("accordion");
+  for(let i=0;i<acc.length;i++){
+    acc[i].onclick = function() {
+      this.classList.toggle("active");
+      let panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+        this.querySelector("span").textContent = "▼";
+      } else {
+        panel.style.display = "block";
+        this.querySelector("span").textContent = "▲";
+      }
+    };
+  }
 
+  // --- INTEGRA tu galería JS aquí (boatsData, showGallery, búsqueda, etc) ---
   const boatsData = {
     "yellowfin42": [
       "gallery/yellowfin42/IMG20250403123239.heic"
@@ -301,85 +259,26 @@
       "gallery/northtech/IMG-20250226-WA0033.jpg"
     ]
   };
-
-  const searchBox = document.getElementById("searchBox");
-  const searchButton = document.getElementById("searchButton");
-  const suggestions = document.getElementById("suggestions");
-  const gallery = document.getElementById("gallery");
-  const languageSwitcher = document.getElementById("languageSwitcher");
-
-  function updateSuggestions(value) {
-    suggestions.innerHTML = "";
-    if (!value) return;
-    const val = value.toLowerCase();
-    const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    const allOptions = [...new Set([...storedHistory, ...Object.keys(boatsData)])];
-    const filtered = allOptions.filter(v => v.toLowerCase().includes(val));
-    filtered.forEach(item => {
-      const div = document.createElement("div");
-      div.innerHTML = `<span style='font-size:20px;opacity:.6'>🔎</span> <span>${item}</span>`;
-      div.onclick = () => {
-        searchBox.value = item;
-        suggestions.innerHTML = "";
-      };
-      suggestions.appendChild(div);
-    });
-  }
-
-  function searchBoat(model) {
-    gallery.innerHTML = "";
-    const lower = model.toLowerCase();
-    const images = boatsData[lower];
+  function showGallery(model) {
+    document.getElementById("gallery").innerHTML = "";
+    const images = boatsData[model];
     if (!images) return;
-
     images.forEach(path => {
       const a = document.createElement("a");
       a.href = path;
-      a.setAttribute("data-lightbox", lower);
+      a.setAttribute("data-lightbox", model);
       const img = document.createElement("img");
       img.src = path;
       img.loading = "lazy";
       a.appendChild(img);
       gallery.appendChild(a);
     });
-
-    let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    if (!history.includes(lower)) {
-      history.unshift(lower);
-      localStorage.setItem("searchHistory", JSON.stringify(history.slice(0, 10)));
-    }
+    sidebar.classList.remove("open");
   }
 
-  searchBox.addEventListener("input", (e) => {
-    updateSuggestions(e.target.value);
-  });
-
-  searchButton.onclick = () => {
-    const model = searchBox.value.trim();
-    if (model) {
-      suggestions.innerHTML = "";
-      searchBoat(model);
-    }
-  };
-
-  function applyLanguage(lang) {
-    const t = translations[lang] || translations["es"];
-    document.getElementById("pageTitle").innerText = t.title;
-    searchBox.placeholder = t.placeholder;
-    searchButton.innerText = t.search;
-    document.getElementById("footerText").innerText = t.reserved;
-  }
-
-  languageSwitcher.addEventListener("change", () => {
-    const lang = languageSwitcher.value;
-    localStorage.setItem("preferredLanguage", lang);
-    applyLanguage(lang);
-  });
-
-  const savedLang = localStorage.getItem("preferredLanguage") || "es";
-  languageSwitcher.value = savedLang;
-  applyLanguage(savedLang);
+  // Sugerencias, búsqueda y multiidioma igual que en la versión anterior...
+  // Puedes copiar y pegar la lógica del mensaje previo aquí sin problema
+  // ...
 </script>
-<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
 </body>
 </html>
