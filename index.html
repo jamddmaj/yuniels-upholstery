@@ -2,278 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Yuniel'S Upholstery LLC - Galería</title>
-  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
+  <title>Menú Demo</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      padding: 0;
-      margin: 0;
-      background: #10141b;
-      color: #fff;
-      min-height: 100vh;
-    }
-    .content-wrapper {
-      margin-left: 70px;
-      padding: 32px 24px 32px 24px;
-      min-height: 100vh;
-    }
-    h1 {
-      margin-bottom: 16px;
-      font-weight: 700;
-      font-size: 2rem;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 6px #0009;
-    }
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      max-width: 600px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 10;
-    }
-    #searchBox {
-      width: 180px;
-      padding: 10px 12px;
-      font-size: 17px;
-      border-radius: 6px;
-      border: none;
-      box-shadow: 0 2px 6px #0004;
-      outline: none;
-      background: #232833;
-      color: #fff;
-    }
-    #searchButton {
-      padding: 10px 18px;
-      font-size: 17px;
-      border: none;
-      border-radius: 6px;
-      background: #2ab7ca;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 2px 6px #0004;
-    }
-    #searchButton:hover {
-      background: #227c8e;
-    }
-    #languageSwitcher {
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: none;
-      background: #222b3a;
-      color: #fff;
-      font-size: 17px;
-      box-shadow: 0 2px 6px #0004;
-      cursor: pointer;
-    }
-    #suggestions {
-      position: absolute;
-      left: 0;
-      top: 40px;
-      width: 180px;
-      background: #21242c;
-      color: #fff;
-      border: 1px solid #38445a;
-      border-top: none;
-      max-height: 220px;
-      overflow-y: auto;
-      z-index: 1001;
-      border-radius: 0 0 9px 9px;
-      box-shadow: 0 4px 14px #0007;
-      animation: fadeIn 0.18s;
-    }
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    #suggestions div {
-      padding: 11px 12px;
-      font-size: 16px;
-      cursor: pointer;
-      border-bottom: 1px solid #242b37;
-      transition: background 0.18s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #suggestions div:last-child {
-      border-bottom: none;
-    }
-    #suggestions div:hover {
-      background: #334058;
-      color: #fff;
-    }
-    #gallery {
-      margin-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 22px;
-      padding-bottom: 48px;
-    }
-    #gallery a {
-      background: #232943;
-      border-radius: 11px;
-      overflow: hidden;
-      box-shadow: 0 2px 14px #0007;
-      transition: box-shadow 0.2s, transform 0.16s;
-      display: block;
-    }
-    #gallery a img {
-      width: 100%;
-      display: block;
-      height: 170px;
-      object-fit: cover;
-      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
-      background: #222;
-    }
-    #gallery a:hover {
-      box-shadow: 0 6px 32px #222c;
-      transform: translateY(-3px) scale(1.04);
-    }
-    .footer {
-      text-align: center;
-      padding: 28px 0 12px;
-      font-size: 15px;
-      color: #9ba3b7;
-      border-top: 1px solid #2ab7ca55;
-      margin-top: 64px;
-      letter-spacing: 1px;
-      background: none;
-    }
-    /* --- MENÚ HAMBURGUESA --- */
+    body { margin: 0; background: #10141b; color: #fff; font-family: Arial,sans-serif; min-height: 100vh;}
     .menu-btn {
-      position: fixed;
-      top: 22px;
-      left: 18px;
-      z-index: 3002;
-      background: none;
-      border: none;
-      cursor: pointer;
-      outline: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
+      position: fixed; top: 24px; left: 24px; z-index: 3002;
+      background: none; border: none; cursor: pointer; outline: none;
+      display: flex; flex-direction: column; gap: 6px;
     }
     .menu-btn span {
-      display: block;
-      width: 31px;
-      height: 5px;
-      background: #fff;
-      border-radius: 3px;
-      transition: .4s;
+      display: block; width: 34px; height: 5px;
+      background: #fff; border-radius: 3px; transition: .4s;
     }
     .sidebar {
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      width: 220px;
-      background: #171c25;
-      box-shadow: 4px 0 30px #000c;
-      padding-top: 70px;
-      z-index: 3001;
+      position: fixed; top: 0; left: 0; bottom: 0; width: 250px;
+      background: #171c25; box-shadow: 4px 0 30px #000c;
+      padding-top: 70px; z-index: 3001;
       transform: translateX(-100%);
       transition: transform .35s cubic-bezier(.71,-0.01,.39,1.01);
       overflow-y: auto;
       border-right: 2px solid #2ab7ca55;
     }
-    .sidebar.open { transform: translateX(0); }
-    .sidebar h2 {
-      margin: 0 0 16px 22px;
-      font-size: 21px;
-      letter-spacing: 2px;
-      color: #2ab7ca;
-      font-weight: 700;
-    }
+    .sidebar.open { transform: translateX(0);}
+    .sidebar h2 { margin: 0 0 16px 22px; font-size: 21px; color: #2ab7ca; font-weight: 700;}
     .accordion {
-      background: none;
-      color: #fff;
-      cursor: pointer;
-      padding: 13px 22px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 17px;
-      font-weight: bold;
-      border-bottom: 1px solid #232a39;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: none; color: #fff; cursor: pointer; padding: 13px 22px; width: 100%;
+      border: none; text-align: left; outline: none; font-size: 17px; font-weight: bold;
+      border-bottom: 1px solid #232a39; display: flex; align-items: center; justify-content: space-between;
     }
-    .accordion.active, .accordion:hover {
-      background: #2ab7ca22;
-    }
+    .accordion.active, .accordion:hover { background: #2ab7ca22;}
     .panel {
-      padding: 0 0 0 22px;
-      display: none;
-      background: #21242e;
-      border-bottom: 1px solid #262d3e;
+      padding: 0 0 0 22px; display: none; background: #21242e; border-bottom: 1px solid #262d3e;
     }
-    .panel a {
-      display: block;
-      padding: 10px 0;
-      color: #b6eaff;
-      text-decoration: none;
-      font-size: 16px;
-      transition: color .17s;
-    }
-    .panel a:hover { color: #2ab7ca; text-decoration: underline; }
+    .panel a { display: block; padding: 10px 0; color: #b6eaff; text-decoration: none; font-size: 16px;}
+    .panel a:hover { color: #2ab7ca;}
     .close-sidebar {
-      position: absolute;
-      top: 22px; right: 22px;
-      background: #222b3a;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      font-size: 21px;
-      cursor: pointer;
-      box-shadow: 0 2px 10px #0006;
-      transition: background .18s;
+      position: absolute; top: 22px; right: 22px;
+      background: #222b3a; color: #fff; border: none; border-radius: 50%;
+      width: 34px; height: 34px; font-size: 21px; cursor: pointer; box-shadow: 0 2px 10px #0006;
     }
-    .close-sidebar:hover { background: #2ab7ca; }
-    /*--- Botones sociales flotantes ---*/
-    .social-float {
-      position: fixed;
-      right: 20px;
-      bottom: 86px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      z-index: 2222;
-    }
-    .social-float a {
-      display: block;
-      background: #fff;
-      border-radius: 50%;
-      box-shadow: 0 3px 12px #0006;
-      width: 54px;
-      height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: box-shadow 0.2s, transform 0.13s;
-    }
-    .social-float a:hover {
-      box-shadow: 0 8px 24px #2ab7ca99;
-      transform: scale(1.11);
-    }
-    .social-float img {
-      width: 34px;
-      height: 34px;
-      display: block;
-    }
-    @media (max-width: 600px) {
-      .content-wrapper { margin-left: 0; padding: 16px 4vw; }
-      .sidebar { width: 82vw; min-width: 160px; }
-      h1 { font-size: 1.2rem; }
-      .social-float { right: 6px; bottom: 68px; gap: 13px; }
-      .social-float a { width: 42px; height: 42px; }
-      .social-float img { width: 26px; height: 26px; }
-    }
+    .close-sidebar:hover { background: #2ab7ca;}
   </style>
 </head>
 <body>
@@ -289,58 +57,23 @@
   <h2>Modelos</h2>
   <button class="accordion">Northtech <span>▼</span></button>
   <div class="panel">
-    <a href="#" onclick="showGallery('northtech'); return false;">Northtech 38</a>
-    <a href="#" onclick="showGallery('northtech'); return false;">Northtech 45</a>
-    <a href="#" onclick="showGallery('northtech'); return false;">Northtech Custom</a>
+    <a href="#">Northtech 38</a>
+    <a href="#">Northtech 45</a>
   </div>
   <button class="accordion">Yellowfin <span>▼</span></button>
   <div class="panel">
-    <a href="#" onclick="showGallery('yellowfin42'); return false;">Yellowfin 42</a>
-    <a href="#" onclick="showGallery('yellowfin36'); return false;">Yellowfin 36</a>
+    <a href="#">Yellowfin 42</a>
+    <a href="#">Yellowfin 36</a>
   </div>
 </nav>
-<!-- CONTENIDO PRINCIPAL -->
-<div class="content-wrapper">
-  <h1 id="pageTitle">Yuniel'S Upholstery LLC</h1>
-  <div class="search-container">
-    <input type="text" id="searchBox" placeholder="Buscar modelo..." autocomplete="off" />
-    <button id="searchButton">Buscar</button>
-    <select id="languageSwitcher">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="pt">Português</option>
-    </select>
-    <div id="suggestions"></div>
-  </div>
-  <div id="gallery"></div>
-  <div class="footer" id="footerText">
-    © 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
-  </div>
-</div>
-<!-- Botones sociales flotantes -->
-<div class="social-float">
-  <a href="https://wa.me/1TUNUMERO" target="_blank" title="WhatsApp">
-    <img src="icons/whatsapp.png" alt="WhatsApp" />
-  </a>
-  <a href="https://instagram.com/TU_USUARIO" target="_blank" title="Instagram">
-    <img src="icons/instagram.png" alt="Instagram" />
-  </a>
-  <a href="https://x.com/TU_USUARIO" target="_blank" title="X (Twitter)">
-    <img src="icons/x.png" alt="X" />
-  </a>
-  <a href="https://facebook.com/TU_USUARIO" target="_blank" title="Facebook">
-    <img src="icons/facebook.png" alt="Facebook" />
-  </a>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
 <script>
-  // Sidebar Menu
+  // Botón abre/cierra menú
   const sidebar = document.getElementById("sidebar");
   const menuBtn = document.getElementById("menuBtn");
   const closeSidebar = document.getElementById("closeSidebar");
   menuBtn.onclick = () => sidebar.classList.add("open");
   closeSidebar.onclick = () => sidebar.classList.remove("open");
+  // Cierra al hacer click fuera
   window.onclick = e => {
     if (sidebar.classList.contains('open') &&
       !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
@@ -362,103 +95,6 @@
       }
     };
   }
-
-  // Traducciones
-  const translations = {
-    es: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Buscar modelo...",
-      search: "Buscar",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados."
-    },
-    en: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Search model...",
-      search: "Search",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. All rights reserved."
-    },
-    fr: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Rechercher un modèle...",
-      search: "Rechercher",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Tous droits réservés."
-    },
-    pt: {
-      title: "Yuniel'S Upholstery LLC",
-      placeholder: "Buscar modelo...",
-      search: "Buscar",
-      reserved: "© 2024 Yuniel'S Upholstery LLC. Todos os direitos reservados."
-    }
-  };
-
-  // Galería de fotos por modelo
-  const boatsData = {
-    "yellowfin42": [
-      "gallery/yellowfin42/IMG20250403123239.heic"
-    ],
-    "northtech": [
-      "gallery/northtech/IMG-20250226-WA0023.jpg",
-      "gallery/northtech/IMG-20250226-WA0024.jpg",
-      "gallery/northtech/IMG-20250226-WA0026.jpg",
-      "gallery/northtech/IMG-20250226-WA0027.jpg",
-      "gallery/northtech/IMG-20250226-WA0028.jpg",
-      "gallery/northtech/IMG-20250226-WA0029.jpg",
-      "gallery/northtech/IMG-20250226-WA0030.jpg",
-      "gallery/northtech/IMG-20250226-WA0031.jpg",
-      "gallery/northtech/IMG-20250226-WA0032.jpg",
-      "gallery/northtech/IMG-20250226-WA0033.jpg"
-    ]
-  };
-
-  function showGallery(model) {
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = "";
-    const images = boatsData[model];
-    if (!images) return;
-    images.forEach(path => {
-      const a = document.createElement("a");
-      a.href = path;
-      a.setAttribute("data-lightbox", model);
-      const img = document.createElement("img");
-      img.src = path;
-      img.loading = "lazy";
-      a.appendChild(img);
-      gallery.appendChild(a);
-    });
-    sidebar.classList.remove("open");
-  }
-
-  // Sugerencias, historial, búsqueda y multiidioma
-  const searchBox = document.getElementById("searchBox");
-  const searchButton = document.getElementById("searchButton");
-  const suggestions = document.getElementById("suggestions");
-  const galleryDiv = document.getElementById("gallery");
-  const languageSwitcher = document.getElementById("languageSwitcher");
-
-  function updateSuggestions(value) {
-    suggestions.innerHTML = "";
-    if (!value) return;
-    const val = value.toLowerCase();
-    const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    const allOptions = [...new Set([...storedHistory, ...Object.keys(boatsData)])];
-    const filtered = allOptions.filter(v => v.toLowerCase().includes(val));
-    filtered.forEach(item => {
-      const div = document.createElement("div");
-      div.innerHTML = `<span style='font-size:20px;opacity:.6'>🔎</span> <span>${item}</span>`;
-      div.onclick = () => {
-        searchBox.value = item;
-        suggestions.innerHTML = "";
-      };
-      suggestions.appendChild(div);
-    });
-  }
-
-  function searchBoat(model) {
-    galleryDiv.innerHTML = "";
-    const lower = model.toLowerCase();
-    const images = boatsData[lower];
-    if (!images) return;
-    images.forEach(path => {
-      const a = document.createElement("a");
-      a.href = path;
-      a.setAttribute("data-lightbox",
+</script>
+</body>
+</html>
