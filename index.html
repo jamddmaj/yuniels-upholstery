@@ -146,7 +146,6 @@
         'gallery/northtech/IMG-20250226-WA0024.jpg',
         'gallery/northtech/IMG-20250226-WA0026.jpg',
         'gallery/northtech/IMG-20250226-WA0027.jpg'
-        // ...agrega más imágenes según tus carpetas
       ],
       yellowfin42: [
         'gallery/yellowfin42/IMG20250403123239.heic'
@@ -181,7 +180,7 @@
       let matches = suggestions.concat(searchHistory).filter(item =>
         item.toLowerCase().includes(val)
       );
-      matches = [...new Set(matches)]; // sin duplicados
+      matches = [...new Set(matches)];
       if(matches.length===0){ suggestionsBox.style.display="none"; return;}
       suggestionsBox.innerHTML = matches.map(m=>`<div class="suggestion-item">${m}</div>`).join('');
       suggestionsBox.style.display="block";
@@ -214,11 +213,10 @@
       e.preventDefault();
       buscar();
     };
-    // Permitir enter con sugerencia
     searchInput.addEventListener("keydown",function(e){
       if(e.key==="Enter"){ e.preventDefault(); buscar();}
     });
-    // Galería lightbox
+    // Lightbox galería
     let currentIndex=0;
     function openLightbox(i){
       currentIndex = i;
@@ -244,7 +242,7 @@
     document.getElementById("lightbox").onclick = function(e){
       if(e.target===this) closeLightbox();
     };
-    // Selector de idioma (solo cambia el texto del placeholder para demo)
-    const langSelect = document.getElementById('langSelect');
-    langSelect.onchange = function() {
-      if(langSelect.value==="en") searchInput.placeholder="
+    // Selector idioma demo
+    document.getElementById('langSelect').onchange = function() {
+      if(this.value==="en") searchInput.placeholder="Search model...";
+      else if(this.value==="pt") searchInput.placeholder="Buscar modelo
