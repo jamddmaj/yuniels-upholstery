@@ -162,6 +162,3 @@ document.getElementById("langSelect").onchange = function () {
   else if (val === "pt") searchInput.placeholder = "Buscar modelo...";
   else searchInput.placeholder = "Buscar modelo...";
 };
-
-// Cargar por defecto
-buscar("northtech");
