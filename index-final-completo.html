@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yuniel'S Upholstery LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="icons/logo-boat.png">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div class="header-row">
+    <button class="menu-btn" id="menuBtn" aria-label="Menú principal">
+      <span></span><span></span><span></span>
+    </button>
+    <img src="icons/logo-boat.png" alt="Logo Yuniel's Upholstery" style="max-height:60px; border-radius:12px; margin-right:12px;">
+    <span class="title">Yuniel'S Upholstery LLC</span>
+  </div>
+
+  <nav class="sidebar" id="sidebar">
+    <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
+    <h2>Modelos</h2>
+    <button class="accordion">Northtech <span>▼</span></button>
+    <div class="panel">
+      <a href="#" onclick="buscar('northtech')">Northtech 38</a>
+      <a href="#" onclick="buscar('northtech')">Northtech 45</a>
+    </div>
+    <button class="accordion">Yellowfin <span>▼</span></button>
+    <div class="panel">
+      <a href="#" onclick="buscar('yellowfin42')">Yellowfin 42</a>
+      <a href="#" onclick="buscar('yellowfin36')">Yellowfin 36</a>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <form id="searchForm" class="search-row" autocomplete="off" style="position:relative;">
+      <input type="text" id="searchInput" placeholder="Buscar modelo..." />
+      <button type="submit">Buscar</button>
+      <select id="langSelect">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="pt">Português</option>
+      </select>
+      <div id="suggestions" class="suggestions-list" style="display:none;"></div>
+    </form>
+    <div id="gallery" class="gallery-grid"></div>
+  </div>
+
+  <!-- NUEVAS SECCIONES -->
+  <section style="padding: 40px 20px; max-width: 900px; margin: auto; color: #b6eaff;">
+    <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 20px;">Sobre Nosotros</h2>
+    <p style="line-height: 1.6; font-size: 1.1em;">
+      En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.
+    </p>
+  </section>
+
+  <section style="background: #18202a; padding: 40px 20px; color: #fff;">
+    <div style="max-width: 900px; margin: auto;">
+      <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 24px;">Nuestros Servicios</h2>
+      <ul style="list-style: none; padding: 0; font-size: 1.1em; line-height: 1.8;">
+        <li>✓ Tapicería para botes, yates y lanchas</li>
+        <li>✓ Reemplazo de cojines y asientos</li>
+        <li>✓ Costura personalizada y bordado</li>
+        <li>✓ Reparaciones de vinilo, lona y cuero marino</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="padding: 40px 20px; max-width: 900px; margin: auto; color: #b6eaff;">
+    <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 20px;">Opiniones de Clientes</h2>
+    <blockquote style="font-style: italic; margin-bottom: 20px;">"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.</blockquote>
+    <blockquote style="font-style: italic;">"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</blockquote>
+  </section>
+
+  <section style="background: #232a39; padding: 40px 20px; color: #fff;">
+    <div style="max-width: 900px; margin: auto;">
+      <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 20px;">Contáctanos</h2>
+      <form action="https://formspree.io/f/your_form_id" method="POST" style="display: flex; flex-direction: column; gap: 14px;">
+        <input type="text" name="name" placeholder="Tu nombre" required style="padding: 12px; border: none; border-radius: 6px; background: #181c22; color: #fff;">
+        <input type="email" name="email" placeholder="Tu correo electrónico" required style="padding: 12px; border: none; border-radius: 6px; background: #181c22; color: #fff;">
+        <textarea name="message" placeholder="Tu mensaje..." rows="5" required style="padding: 12px; border: none; border-radius: 6px; background: #181c22; color: #fff;"></textarea>
+        <button type="submit" style="background: #2ab7ca; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; color: #fff; cursor: pointer;">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="social-fab">
+    <button class="social-btn" onclick="window.open('https://wa.me/1XXXXXXXXXX', '_blank')" title="WhatsApp">
+      <img src="icons/whatsapp.png" alt="WhatsApp">
+    </button>
+    <button class="social-btn" onclick="window.open('https://instagram.com/TUUSUARIO', '_blank')" title="Instagram">
+      <img src="icons/instagram.png" alt="Instagram">
+    </button>
+    <button class="social-btn" onclick="window.open('https://x.com/TUUSUARIO', '_blank')" title="X (Twitter)">
+      <img src="icons/x.png" alt="X">
+    </button>
+    <button class="social-btn" onclick="window.open('https://facebook.com/TUUSUARIO', '_blank')" title="Facebook">
+      <img src="icons/facebook.png" alt="Facebook">
+    </button>
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-img-wrapper">
+      <button class="lightbox-btn prev" id="lightboxPrev">&#8678; Anterior</button>
+      <img id="lightboxImg" class="lightbox-img" src="" alt="Foto de tapicería" />
+      <button class="lightbox-btn next" id="lightboxNext">Siguiente &#8680;</button>
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <div class="copyright">© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.</div>
+</body>
+</html>
