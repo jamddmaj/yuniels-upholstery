@@ -1,164 +1,89 @@
-// === Menú lateral ===
-const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
-const closeSidebar = document.getElementById("closeSidebar");
+const searchInput = document.getElementById('searchInput');
+const langSelect = document.getElementById('langSelect');
 
-menuBtn.onclick = e => {
-  e.stopPropagation();
-  sidebar.classList.add("open");
+// Elementos que vamos a traducir
+const labels = {
+  titleServicios: document.querySelector("h2[data-key='services']"),
+  titleOpiniones: document.querySelector("h2[data-key='reviews']"),
+  titleContacto: document.querySelector("h2[data-key='contact']"),
+  titleUbicacion: document.querySelector("h2[data-key='location']"),
+  labelNombre: document.querySelector("input[name='name']"),
+  labelCorreo: document.querySelector("input[name='email']"),
+  labelMensaje: document.querySelector("textarea[name='message']"),
+  btnEnviar: document.querySelector("button[type='submit']")
 };
 
-closeSidebar.onclick = () => sidebar.classList.remove("open");
-
-document.addEventListener("click", e => {
-  if (sidebar.classList.contains("open") &&
-      !sidebar.contains(e.target) &&
-      e.target !== menuBtn &&
-      !menuBtn.contains(e.target)) {
-    sidebar.classList.remove("open");
+const translations = {
+  es: {
+    placeholder: "Buscar modelo...",
+    services: "Nuestros Servicios",
+    reviews: "Opiniones de Clientes",
+    contact: "Contáctanos",
+    location: "Nuestra Ubicación",
+    name: "Tu nombre",
+    email: "Tu correo electrónico",
+    message: "Tu mensaje...",
+    send: "Enviar"
+  },
+  en: {
+    placeholder: "Search model...",
+    services: "Our Services",
+    reviews: "Client Testimonials",
+    contact: "Contact Us",
+    location: "Our Location",
+    name: "Your name",
+    email: "Your email",
+    message: "Your message...",
+    send: "Send"
+  },
+  pt: {
+    placeholder: "Procurar modelo...",
+    services: "Nossos Serviços",
+    reviews: "Depoimentos de Clientes",
+    contact: "Contate-nos",
+    location: "Nossa Localização",
+    name: "Seu nome",
+    email: "Seu email",
+    message: "Sua mensagem...",
+    send: "Enviar"
+  },
+  fr: {
+    placeholder: "Rechercher un modèle...",
+    services: "Nos Services",
+    reviews: "Avis des Clients",
+    contact: "Contactez-nous",
+    location: "Notre Emplacement",
+    name: "Votre nom",
+    email: "Votre e-mail",
+    message: "Votre message...",
+    send: "Envoyer"
+  },
+  de: {
+    placeholder: "Modell suchen...",
+    services: "Unsere Dienstleistungen",
+    reviews: "Kundenmeinungen",
+    contact: "Kontaktieren Sie uns",
+    location: "Unser Standort",
+    name: "Ihr Name",
+    email: "Ihre E-Mail",
+    message: "Ihre Nachricht...",
+    send: "Senden"
   }
-});
+};
 
-// === Acordeones ===
-document.querySelectorAll(".accordion").forEach(btn => {
-  btn.onclick = function () {
-    this.classList.toggle("active");
-    const panel = this.nextElementSibling;
-    const arrow = this.querySelector("span");
-    const isOpen = panel.style.display === "block";
-    panel.style.display = isOpen ? "none" : "block";
-    arrow.textContent = isOpen ? "▼" : "▲";
+if (langSelect) {
+  langSelect.onchange = () => {
+    const lang = langSelect.value;
+    const t = translations[lang] || translations["es"];
+    searchInput.placeholder = t.placeholder;
+
+    if (labels.titleServicios) labels.titleServicios.textContent = t.services;
+    if (labels.titleOpiniones) labels.titleOpiniones.textContent = t.reviews;
+    if (labels.titleContacto) labels.titleContacto.textContent = t.contact;
+    if (labels.titleUbicacion) labels.titleUbicacion.textContent = t.location;
+    if (labels.labelNombre) labels.labelNombre.placeholder = t.name;
+    if (labels.labelCorreo) labels.labelCorreo.placeholder = t.email;
+    if (labels.labelMensaje) labels.labelMensaje.placeholder = t.message;
+    if (labels.btnEnviar) labels.btnEnviar.textContent = t.send;
   };
-});
-
-// === Galería de imágenes ===
-const galleryData = {
-  northtech: [
-    "gallery/northtech/IMG-20250226-WA0023.jpg",
-    "gallery/northtech/IMG-20250226-WA0024.jpg",
-    "gallery/northtech/IMG-20250226-WA0026.jpg",
-    "gallery/northtech/IMG-20250226-WA0027.jpg"
-  ],
-  yellowfin42: [
-    "gallery/yellowfin42/IMG20250403123239.jpg"
-  ],
-  yellowfin36: []
-};
-
-let suggestions = Object.keys(galleryData);
-let searchHistory = [];
-const galleryEl = document.getElementById("gallery");
-let currentImages = [], currentModel = "";
-
-// Renderizar galería
-function renderGallery(images) {
-  galleryEl.innerHTML = "";
-  if (!images.length) {
-    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
-    return;
-  }
-  images.forEach((src, i) => {
-    const el = document.createElement("img");
-    el.src = src;
-    el.className = "gallery-img";
-    el.alt = "Foto " + (i + 1);
-    el.loading = "lazy";
-    el.onclick = () => openLightbox(i);
-    galleryEl.appendChild(el);
-  });
 }
-
-// === Sugerencias y búsqueda ===
-const searchInput = document.getElementById("searchInput");
-const suggestionsBox = document.getElementById("suggestions");
-
-searchInput.addEventListener("input", function () {
-  const val = this.value.trim().toLowerCase();
-  if (!val) return suggestionsBox.style.display = "none";
-  let matches = suggestions.concat(searchHistory).filter(item => item.includes(val));
-  matches = [...new Set(matches)];
-  if (!matches.length) return suggestionsBox.style.display = "none";
-  suggestionsBox.innerHTML = matches.map(m => `<div class="suggestion-item">${m}</div>`).join("");
-  suggestionsBox.style.display = "block";
-  document.querySelectorAll(".suggestion-item").forEach(item => {
-    item.onclick = () => {
-      searchInput.value = item.textContent;
-      suggestionsBox.style.display = "none";
-    };
-  });
-});
-
-document.addEventListener("click", function (e) {
-  if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
-    suggestionsBox.style.display = "none";
-  }
-});
-
-function buscar(modelo) {
-  modelo = (modelo || searchInput.value.trim()).toLowerCase();
-  if (!modelo) return;
-  currentModel = modelo;
-  currentImages = galleryData[modelo] || [];
-  if (currentImages.length && !searchHistory.includes(modelo)) {
-    searchHistory.unshift(modelo);
-  }
-  renderGallery(currentImages);
-  suggestionsBox.style.display = "none";
-  searchInput.value = modelo;
-}
-
-document.getElementById("searchForm").onsubmit = function (e) {
-  e.preventDefault();
-  buscar();
-};
-
-searchInput.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    buscar();
-  }
-});
-
-// === Lightbox ===
-let currentIndex = 0;
-
-function openLightbox(i) {
-  currentIndex = i;
-  showLightbox();
-}
-
-function showLightbox() {
-  if (!currentImages.length) return;
-  document.getElementById("lightboxImg").src = currentImages[currentIndex];
-  document.getElementById("lightbox").classList.add("open");
-  document.getElementById("lightboxCounter").textContent =
-    "Imagen " + (currentIndex + 1) + " de " + currentImages.length;
-}
-
-function closeLightbox() {
-  document.getElementById("lightbox").classList.remove("open");
-}
-
-document.getElementById("lightboxClose").onclick = closeLightbox;
-
-document.getElementById("lightboxPrev").onclick = function () {
-  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-  showLightbox();
-};
-
-document.getElementById("lightboxNext").onclick = function () {
-  currentIndex = (currentIndex + 1) % currentImages.length;
-  showLightbox();
-};
-
-document.getElementById("lightbox").onclick = function (e) {
-  if (e.target === this) closeLightbox();
-};
-
-// === Idiomas ===
-document.getElementById("langSelect").onchange = function () {
-  const val = this.value;
-  if (val === "en") searchInput.placeholder = "Search model...";
-  else if (val === "pt") searchInput.placeholder = "Buscar modelo...";
-  else searchInput.placeholder = "Buscar modelo...";
-};
