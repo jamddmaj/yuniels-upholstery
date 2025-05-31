@@ -38,10 +38,21 @@
       <input type="text" id="searchInput" placeholder="Buscar modelo..." />
       <button type="submit">Buscar</button>
       <select id="langSelect">
-        <option value="es">Español</option>
-        <option value="en">English</option>
-        <option value="pt">Português</option>
-      </select>
+<option value="es">Español</option>
+<option value="en">English</option>
+<option value="pt">Português</option>
+<option value="fr">Français</option>
+<option value="de">Deutsch</option>
+<option value="it">Italiano</option>
+<option value="ru">Русский</option>
+<option value="ar">العربية</option>
+<option value="zh">中文</option>
+<option value="ja">日本語</option>
+<option value="pl">Polski</option>
+<option value="tr">Türkçe</option>
+<option value="uk">Українська</option>
+<option value="nl">Nederlands</option>
+</select>
       <div id="suggestions" class="suggestions-list" style="display:none;"></div>
     </form>
     <div id="gallery" class="gallery-grid"></div>
@@ -57,7 +68,7 @@
 
   <section style="background: #18202a; padding: 40px 20px; color: #fff;">
     <div style="max-width: 900px; margin: auto;">
-      <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 24px;">Nuestros Servicios</h2>
+      <h2 data-key="services">Nuestros Servicios</h2>
       <ul style="list-style: none; padding: 0; font-size: 1.1em; line-height: 1.8;">
         <li>✓ Tapicería para botes, yates y lanchas</li>
         <li>✓ Reemplazo de cojines y asientos</li>
@@ -68,14 +79,14 @@
   </section>
 
   <section style="padding: 40px 20px; max-width: 900px; margin: auto; color: #b6eaff;">
-    <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 20px;">Opiniones de Clientes</h2>
+    <h2 data-key="reviews">Opiniones de Clientes</h2>
     <blockquote style="font-style: italic; margin-bottom: 20px;">"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.</blockquote>
     <blockquote style="font-style: italic;">"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</blockquote>
   </section>
 
   <section style="background: #232a39; padding: 40px 20px; color: #fff;">
     <div style="max-width: 900px; margin: auto;">
-      <h2 style="color: #2ab7ca; font-size: 1.8em; margin-bottom: 20px;">Contáctanos</h2>
+      <h2 data-key="contact">Contáctanos</h2>
       <form action="https://formspree.io/f/your_form_id" method="POST" style="display: flex; flex-direction: column; gap: 14px;">
         <input type="text" name="name" placeholder="Tu nombre" required style="padding: 12px; border: none; border-radius: 6px; background: #181c22; color: #fff;">
         <input type="email" name="email" placeholder="Tu correo electrónico" required style="padding: 12px; border: none; border-radius: 6px; background: #181c22; color: #fff;">
