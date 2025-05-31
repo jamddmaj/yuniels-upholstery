@@ -12,10 +12,10 @@ Sitio web para mostrar los modelos y trabajos de tapicería de Yuniel. Este proy
 
 ```
 yuniels-upholstery/
-│
 ├── index.html        # Página principal
 ├── style.css         # Estilos del sitio
 ├── main.js           # Funcionalidad y lógica
+├── static.json       # Configuración para Render
 ├── icons/            # Íconos de redes sociales
 └── gallery/          # Imágenes de los modelos
 ```
@@ -26,27 +26,8 @@ yuniels-upholstery/
 2. Abre `index.html` en tu navegador para ver el sitio localmente.
 3. Sube los archivos a [Render](https://render.com) o GitHub Pages para publicarlo en línea.
 
-## 📷 Agregar imágenes
+## 💡 Notas
 
-Guarda las imágenes en la carpeta `gallery/` con subcarpetas por modelo. Ejemplo:
-
-```
-gallery/
-├── northtech/
-│   ├── modelo1.jpg
-│   └── modelo2.jpg
-└── yellowfin42/
-    └── ejemplo.jpg
-```
-
-**Nota:** Convierte imágenes `.heic` a `.jpg` o `.webp` para mejor compatibilidad.
-
-## ✨ Mejores prácticas
-
-- Mantén los archivos `.css` y `.js` separados del HTML.
-- Usa imágenes optimizadas para mejorar la velocidad.
-- Actualiza `galleryData` en `main.js` si agregas nuevos modelos.
-
----
-
-© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.
+- Usa imágenes `.jpg` o `.webp` (evita `.heic`)
+- Actualiza `galleryData` en `main.js` si agregas nuevos modelos
+- Para recibir formularios, configura tu ID en Formspree
