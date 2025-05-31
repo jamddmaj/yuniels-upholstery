@@ -52,11 +52,21 @@ let currentImages = [], currentModel = "";
 
 // Renderizar galería
 function renderGallery(images) {
-  galleryEl.innerHTML = "";
+  galleryEl.innerHTML = '';
   if (!images.length) {
-    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
+    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">Selecciona un modelo para ver imágenes.</div>';
     return;
   }
+  images.forEach((src, i) => {
+    const el = document.createElement("img");
+    el.src = src;
+    el.className = "gallery-img";
+    el.alt = "Foto " + (i + 1);
+    el.loading = "lazy";
+    el.onclick = () => openLightbox(i);
+    galleryEl.appendChild(el);
+  });
+}
   images.forEach((src, i) => {
     const el = document.createElement("img");
     el.src = src;
