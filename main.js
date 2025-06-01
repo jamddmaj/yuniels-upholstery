@@ -34,40 +34,15 @@ document.querySelectorAll(".accordion").forEach(btn => {
 // === Galería de imágenes ===
 const galleryData = {
   northtech: [
-    "foto1.png",
-    "foto2.png",
-    "foto3.png",
-    "foto5.png",
-    "foto6.png",
-    "foto7.png",
-    "foto8.png",
-    "foto9.png",
-    "foto10.png",
-    "foto4.png"
+    "gallery/northtech/IMG-20250226-WA0023.jpg",
+    "gallery/northtech/IMG-20250226-WA0024.jpg",
+    "gallery/northtech/IMG-20250226-WA0026.jpg",
+    "gallery/northtech/IMG-20250226-WA0027.jpg"
   ],
   yellowfin42: [
-    "foto1.png.jpg",
-    "foto2.png.jpg",
-    "foto3.png.jpg",
-    "foto5.png.jpg",
-    "foto6.png",
-    "foto7.png",
-    "foto8.png",
-    "foto9.png",
-    "foto10.png",
-    "foto4.png""
+    "gallery/yellowfin42/IMG20250403123239.jpg"
   ],
-  yellowfin36: [
-    "foto1.png",
-    "foto2.png",
-    "foto3.png",
-    "foto5.png",
-    "foto6.png",
-    "foto7.png",
-    "foto8.png",
-    "foto9.png",
-    "foto10.png",
-    "foto4.png"]
+  yellowfin36: []
 };
 
 let suggestions = Object.keys(galleryData);
