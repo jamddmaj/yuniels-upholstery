@@ -163,31 +163,6 @@ document.getElementById("langSelect").onchange = function () {
   else searchInput.placeholder = "Buscar modelo...";
 };
 
-// MENÚ Y ACORDEÓN
-const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
-const closeSidebar = document.getElementById("closeSidebar");
-if(menuBtn) menuBtn.onclick = e => { e.stopPropagation(); sidebar.classList.add("open"); };
-if(closeSidebar) closeSidebar.onclick = () => sidebar.classList.remove("open");
-document.addEventListener("click", e => {
-  if (sidebar && sidebar.classList.contains('open') &&
-    !sidebar.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
-    sidebar.classList.remove("open");
-  }
-});
-document.querySelectorAll(".accordion").forEach(btn => {
-  btn.onclick = function () {
-    this.classList.toggle("active");
-    let panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-      this.querySelector("span").textContent = "▼";
-    } else {
-      panel.style.display = "block";
-      this.querySelector("span").textContent = "▲";
-    }
-  };
-});
 // TRADUCCIÓN MULTI-IDIOMA
 const langSelect = document.getElementById('langSelect');
 const searchInput = document.getElementById('searchInput');
@@ -207,32 +182,3 @@ const translations = {
   uk: { placeholder: "Пошук моделі...", services: "Наші послуги", reviews: "Відгуки клієнтів", contact: "Зв'язатися з нами", location: "Наша локація", name: "Ваше ім'я", email: "Ваш email", message: "Ваше повідомлення...", send: "Відправити" },
   nl: { placeholder: "Model zoeken...", services: "Onze Diensten", reviews: "Klantbeoordelingen", contact: "Contact", location: "Onze Locatie", name: "Je naam", email: "Je e-mail", message: "Je bericht...", send: "Verstuur" }
 };
-function applyLanguage(lang) {
-  const t = translations[lang] || translations["es"];
-  if (searchInput) searchInput.placeholder = t.placeholder;
-  document.querySelectorAll("[data-key]").forEach(el => {
-    const key = el.getAttribute("data-key");
-    if (t[key]) el.textContent = t[key];
-  });
-  ["name", "email", "message"].forEach(name => {
-    const input = document.querySelector(`[name='${name}']`);
-    if (input && t[name]) input.placeholder = t[name];
-  });
-  const btn = document.querySelector("button[type='submit']");
-  if (btn && t.send) btn.textContent = t.send;
-}
-function saveLang(lang) { try { localStorage.setItem("lang", lang); } catch {} }
-function getLang() {
-  try { return localStorage.getItem("lang") || "es"; } catch { return "es"; }
-}
-if (langSelect) {
-  langSelect.value = getLang();
-  applyLanguage(langSelect.value);
-  langSelect.onchange = () => {
-    const lang = langSelect.value;
-    saveLang(lang);
-    applyLanguage(lang);
-  };
-} else {
-  applyLanguage(getLang());
-}
