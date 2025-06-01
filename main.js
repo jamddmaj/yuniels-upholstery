@@ -40,7 +40,7 @@ const galleryData = {
     "gallery/northtech/IMG-20250226-WA0027.jpg"
   ],
   yellowfin42: [
-    "foto1.png.jpg"
+    "foto3.png.jpg"
   ],
   yellowfin36: []
 };
