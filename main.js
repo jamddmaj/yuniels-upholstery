@@ -163,10 +163,6 @@ document.getElementById("langSelect").onchange = function () {
   else searchInput.placeholder = "Buscar modelo...";
 };
 
-// TRADUCCIÓN MULTI-IDIOMA
-const langSelect = document.getElementById('langSelect');
-const searchInput = document.getElementById('searchInput');
-const translations = {
   es: { placeholder: "Buscar modelo...", services: "Nuestros Servicios", reviews: "Opiniones de Clientes", contact: "Contáctanos", location: "Nuestra Ubicación", name: "Tu nombre", email: "Tu correo electrónico", message: "Tu mensaje...", send: "Enviar" },
   en: { placeholder: "Search model...", services: "Our Services", reviews: "Client Testimonials", contact: "Contact Us", location: "Our Location", name: "Your name", email: "Your email", message: "Your message...", send: "Send" },
   pt: { placeholder: "Procurar modelo...", services: "Nossos Serviços", reviews: "Depoimentos de Clientes", contact: "Contate-nos", location: "Nossa Localização", name: "Seu nome", email: "Seu email", message: "Sua mensagem...", send: "Enviar" },
