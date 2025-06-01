@@ -42,7 +42,7 @@ const galleryData = {
     "foto2.jpg"
   ],
   yellowfin42: [
-    "foto3.png.jpg"
+    "gallery/yellowfin42/foto3.png.jpg"
   ],
   yellowfin36: []
 };
