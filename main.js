@@ -34,15 +34,23 @@ document.querySelectorAll(".accordion").forEach(btn => {
 // === Galería de imágenes ===
 const galleryData = {
   northtech: [
-    "gallery/northtech/IMG-20250226-WA0023.jpg",
-    "gallery/northtech/IMG-20250226-WA0024.jpg",
-    "gallery/northtech/IMG-20250226-WA0026.jpg",
-    "gallery/northtech/IMG-20250226-WA0027.jpg",
-    "gallery/northtech/foto1.jpg",
-    "gallery/northtech/foto2.jpg"
+    "gallery/northtech/foto1.png",
+    "gallery/northtech/foto2.pmg",
+    "gallery/northtech/foto3.png",
+    "gallery/northtech/foto4.png",
+    "gallery/northtech/foto5.png",
+    "gallery/northtech/foto6.png",
+    "gallery/northtech/foto7.pmg",
+    "gallery/northtech/foto8.png",
+    "gallery/northtech/foto9.png",
+    "gallery/northtech/foto10.png"
   ],
   yellowfin42: [
-    "gallery/yellowfin42/foto3.png.jpg"
+    "gallery/yellowfin42/foto1.jpg",
+    "gallery/yellowfin42/foto2.jpg",
+    "gallery/yellowfin42/foto3.jpg",
+    "gallery/yellowfin42/foto4.jpg",
+    "gallery/yellowfin42/foto5.jpg"
   ],
   yellowfin36: []
 };
