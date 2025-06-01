@@ -172,3 +172,31 @@ document.getElementById("langSelect").onchange = function () {
   else if (val === "pt") searchInput.placeholder = "Buscar modelo...";
   else searchInput.placeholder = "Buscar modelo...";
 };
+const langSelect = document.getElementById('langSelect');
+const availableLangs = ['es', 'en', 'ja']; // Agrega más códigos aquí si quieres
+
+function showLanguage(lang) {
+  availableLangs.forEach(l => {
+    document.querySelectorAll('.lang-' + l).forEach(el => {
+      el.style.display = (l === lang) ? '' : 'none';
+    });
+  });
+}
+
+function saveLang(lang) {
+  try { localStorage.setItem('lang', lang); } catch {}
+}
+
+function getSavedLang() {
+  try { return localStorage.getItem('lang') || 'es'; } catch { return 'es'; }
+}
+
+const savedLang = getSavedLang();
+langSelect.value = savedLang;
+showLanguage(savedLang);
+
+langSelect.addEventListener('change', () => {
+  const lang = langSelect.value;
+  showLanguage(lang);
+  saveLang(lang);
+});
