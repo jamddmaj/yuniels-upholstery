@@ -3,146 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <title>Yuniel'S Upholstery LLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Yuniel'S Upholstery LLC</h1>
-    <select id="langSelect" aria-label="Seleccionar idioma">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="pt">Português</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ja">日本語</option>
-      <option value="zh">中文</option>
-      <option value="ar">العربية</option>
-      <!-- Puedes agregar más opciones aquí -->
-    </select>
+  <header class="header-row">
+    <button class="menu-btn" id="menuBtn" aria-label="Menú principal">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="title" data-key="title">Yuniel'S Upholstery LLC</span>
+    <select id="langSelect" aria-label="Seleccionar idioma"></select>
   </header>
+  <nav class="sidebar" id="sidebar" aria-label="Menú lateral">
+    <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
+    <h2 data-key="models">Modelos</h2>
+    <button class="accordion">Northtech <span>▼</span></button>
+    <div class="panel">
+      <a href="#" onclick="buscar('northtech')">Northtech 38</a>
+      <a href="#" onclick="buscar('northtech')">Northtech 45</a>
+    </div>
+    <button class="accordion">Yellowfin <span>▼</span></button>
+    <div class="panel">
+      <a href="#" onclick="buscar('yellowfin42')">Yellowfin 42</a>
+      <a href="#" onclick="buscar('yellowfin36')">Yellowfin 36</a>
+    </div>
+  </nav>
 
-  <main>
+  <main class="main-content">
+    <form id="searchForm" class="search-row" autocomplete="off" role="search">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder=""
+        aria-label="Buscar modelo"
+      />
+      <button type="submit" data-key="search">Buscar</button>
+      <div id="suggestions" class="suggestions-list" aria-live="polite" style="display:none;"></div>
+    </form>
+
+    <section id="gallery" class="gallery-grid" aria-label="Galería de modelos"></section>
+
     <section>
-      <h2 data-key="aboutTitle">Sobre Nosotros</h2>
-      <p data-key="aboutText">En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.</p>
+      <h2 data-key="aboutUs">Sobre Nosotros</h2>
+      <p data-key="aboutText">
+        En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.
+      </p>
+    </section>
 
-      <h3 data-key="servicesTitle">Nuestros Servicios</h3>
+    <section>
+      <h2 data-key="services">Nuestros Servicios</h2>
       <ul>
         <li data-key="service1">Tapicería para botes, yates y lanchas</li>
         <li data-key="service2">Reemplazo de cojines y asientos</li>
         <li data-key="service3">Costura personalizada y bordado</li>
         <li data-key="service4">Reparaciones de vinilo, lona y cuero marino</li>
       </ul>
+    </section>
 
-      <h3 data-key="reviewsTitle">Opiniones de Clientes</h3>
-      <blockquote data-key="review1">"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.</blockquote>
-      <blockquote data-key="review2">"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</blockquote>
+    <section>
+      <h2 data-key="testimonials">Opiniones de Clientes</h2>
+      <blockquote>
+        <p>"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.</p>
+        <p>"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</p>
+      </blockquote>
+    </section>
 
-      <h3 data-key="contactTitle">Contáctanos</h3>
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="text" name="name" placeholder="" data-key="namePlaceholder" required />
-        <input type="email" name="email" placeholder="" data-key="emailPlaceholder" required />
-        <textarea name="message" placeholder="" data-key="messagePlaceholder" required></textarea>
-        <button type="submit" data-key="sendButton">Enviar</button>
+    <section>
+      <h2 data-key="contact">Contáctanos</h2>
+      <form id="contactForm" role="form">
+        <input type="text" name="name" placeholder="" required />
+        <input type="email" name="email" placeholder="" required />
+        <textarea name="message" placeholder="" rows="4" required></textarea>
+        <button type="submit" data-key="send">Enviar</button>
       </form>
     </section>
+
+    <footer>
+      <p>© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados.</p>
+    </footer>
   </main>
 
-  <script>
-    const translations = {
-      es: {
-        aboutTitle: "Sobre Nosotros",
-        aboutText: "En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.",
-        servicesTitle: "Nuestros Servicios",
-        service1: "Tapicería para botes, yates y lanchas",
-        service2: "Reemplazo de cojines y asientos",
-        service3: "Costura personalizada y bordado",
-        service4: "Reparaciones de vinilo, lona y cuero marino",
-        reviewsTitle: "Opiniones de Clientes",
-        review1: "\"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!\" – Carlos R.",
-        review2: "\"Muy profesionales. El diseño personalizado superó mis expectativas.\" – Andrea M.",
-        contactTitle: "Contáctanos",
-        namePlaceholder: "Tu nombre",
-        emailPlaceholder: "Tu correo electrónico",
-        messagePlaceholder: "Tu mensaje...",
-        sendButton: "Enviar"
-      },
-      en: {
-        aboutTitle: "About Us",
-        aboutText: "At Yuniel's Upholstery LLC, we specialize in marine upholstery in Miami. With over 10 years of experience, we offer restoration and customization of marine interiors with high-quality materials.",
-        servicesTitle: "Our Services",
-        service1: "Upholstery for boats, yachts, and launches",
-        service2: "Cushion and seat replacement",
-        service3: "Custom sewing and embroidery",
-        service4: "Vinyl, canvas, and marine leather repairs",
-        reviewsTitle: "Client Testimonials",
-        review1: "\"Impeccable work on my yacht. The finish is luxurious and delivered on time. Highly recommended!\" – Carlos R.",
-        review2: "\"Very professional. The custom design exceeded my expectations.\" – Andrea M.",
-        contactTitle: "Contact Us",
-        namePlaceholder: "Your name",
-        emailPlaceholder: "Your email",
-        messagePlaceholder: "Your message...",
-        sendButton: "Send"
-      },
-      pt: {
-        aboutTitle: "Sobre Nós",
-        aboutText: "Na Yuniel's Upholstery LLC, especializamo-nos em estofamento marinho em Miami. Com mais de 10 anos de experiência, oferecemos restauração e personalização de interiores marinhos com materiais de alta qualidade.",
-        servicesTitle: "Nossos Serviços",
-        service1: "Estofamento para barcos, iates e lanchas",
-        service2: "Substituição de almofadas e assentos",
-        service3: "Costura personalizada e bordado",
-        service4: "Reparos em vinil, lona e couro marinho",
-        reviewsTitle: "Depoimentos de Clientes",
-        review1: "\"Trabalho impecável no meu iate. O acabamento é de luxo e entregue no prazo. Altamente recomendado!\" – Carlos R.",
-        review2: "\"Muito profissionais. O design personalizado superou minhas expectativas.\" – Andrea M.",
-        contactTitle: "Contate-Nos",
-        namePlaceholder: "Seu nome",
-        emailPlaceholder: "Seu email",
-        messagePlaceholder: "Sua mensagem...",
-        sendButton: "Enviar"
-      },
-      // Puedes añadir más idiomas siguiendo esta estructura
-    };
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCounter">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+    <button class="lightbox-btn prev" id="lightboxPrev" aria-label="Imagen anterior">&#8678;</button>
+    <img id="lightboxImg" class="lightbox-img" alt="Foto de tapicería" />
+    <button class="lightbox-btn next" id="lightboxNext" aria-label="Imagen siguiente">&#8680;</button>
+    <div id="lightboxCounter" class="lightbox-counter"></div>
+  </div>
 
-    const langSelect = document.getElementById('langSelect');
+  <div class="social-fab" role="region" aria-label="Redes sociales">
+    <button class="social-btn" onclick="window.open('https://wa.me/1XXXXXXXXXX', '_blank')" title="WhatsApp">
+      <img src="icons/whatsapp.png" alt="WhatsApp" />
+    </button>
+    <button class="social-btn" onclick="window.open('https://instagram.com/TUUSUARIO', '_blank')" title="Instagram">
+      <img src="icons/instagram.png" alt="Instagram" />
+    </button>
+    <button class="social-btn" onclick="window.open('https://x.com/TUUSUARIO', '_blank')" title="X (Twitter)">
+      <img src="icons/x.png" alt="X" />
+    </button>
+    <button class="social-btn" onclick="window.open('https://facebook.com/TUUSUARIO', '_blank')" title="Facebook">
+      <img src="icons/facebook.png" alt="Facebook" />
+    </button>
+  </div>
 
-    function applyTranslations(lang) {
-      const texts = translations[lang] || translations.es;
-      document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if(texts[key]) {
-          if(el.placeholder !== undefined) {
-            el.placeholder = texts[key];
-          } else {
-            el.textContent = texts[key];
-          }
-        }
-      });
-    }
-
-    function saveLang(lang) {
-      try {
-        localStorage.setItem('lang', lang);
-      } catch {}
-    }
-
-    function getLang() {
-      try {
-        return localStorage.getItem('lang') || 'es';
-      } catch {
-        return 'es';
-      }
-    }
-
-    langSelect.value = getLang();
-    applyTranslations(langSelect.value);
-
-    langSelect.addEventListener('change', () => {
-      const selectedLang = langSelect.value;
-      applyTranslations(selectedLang);
-      saveLang(selectedLang);
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
