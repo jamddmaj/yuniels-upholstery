@@ -46,10 +46,10 @@ const galleryData = {
     "foto4.png"
   ],
   yellowfin42: [
-    "foto1.png",
-    "foto2.png",
-    "foto3.png",
-    "foto5.png",
+    "foto1.png.jpg",
+    "foto2.png.jpg",
+    "foto3.png.jpg",
+    "foto5.png.jpg",
     "foto6.png",
     "foto7.png",
     "foto8.png",
