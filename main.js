@@ -1,4 +1,4 @@
-// Menú lateral
+// === Menú lateral ===
 const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
 const closeSidebar = document.getElementById("closeSidebar");
@@ -11,17 +11,15 @@ menuBtn.onclick = e => {
 closeSidebar.onclick = () => sidebar.classList.remove("open");
 
 document.addEventListener("click", e => {
-  if (
-    sidebar.classList.contains("open") &&
-    !sidebar.contains(e.target) &&
-    e.target !== menuBtn &&
-    !menuBtn.contains(e.target)
-  ) {
+  if (sidebar.classList.contains("open") &&
+      !sidebar.contains(e.target) &&
+      e.target !== menuBtn &&
+      !menuBtn.contains(e.target)) {
     sidebar.classList.remove("open");
   }
 });
 
-// Acordeones
+// === Acordeones ===
 document.querySelectorAll(".accordion").forEach(btn => {
   btn.onclick = function () {
     this.classList.toggle("active");
@@ -33,7 +31,7 @@ document.querySelectorAll(".accordion").forEach(btn => {
   };
 });
 
-// Galería
+// === Galería de imágenes ===
 const galleryData = {
   northtech: [
     "gallery/northtech/foto1.jpg",
@@ -60,14 +58,13 @@ const galleryData = {
 let suggestions = Object.keys(galleryData);
 let searchHistory = [];
 const galleryEl = document.getElementById("gallery");
-let currentImages = [],
-  currentModel = "";
+let currentImages = [], currentModel = "";
 
+// Renderizar galería
 function renderGallery(images) {
   galleryEl.innerHTML = "";
   if (!images.length) {
-    galleryEl.innerHTML =
-      '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
+    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
     return;
   }
   images.forEach((src, i) => {
@@ -81,21 +78,17 @@ function renderGallery(images) {
   });
 }
 
-// Sugerencias y búsqueda
+// === Sugerencias y búsqueda ===
 const searchInput = document.getElementById("searchInput");
 const suggestionsBox = document.getElementById("suggestions");
 
 searchInput.addEventListener("input", function () {
   const val = this.value.trim().toLowerCase();
-  if (!val) return (suggestionsBox.style.display = "none");
-  let matches = suggestions
-    .concat(searchHistory)
-    .filter(item => item.includes(val));
+  if (!val) return suggestionsBox.style.display = "none";
+  let matches = suggestions.concat(searchHistory).filter(item => item.includes(val));
   matches = [...new Set(matches)];
-  if (!matches.length) return (suggestionsBox.style.display = "none");
-  suggestionsBox.innerHTML = matches
-    .map(m => `<div class="suggestion-item">${m}</div>`)
-    .join("");
+  if (!matches.length) return suggestionsBox.style.display = "none";
+  suggestionsBox.innerHTML = matches.map(m => `<div class="suggestion-item">${m}</div>`).join("");
   suggestionsBox.style.display = "block";
   document.querySelectorAll(".suggestion-item").forEach(item => {
     item.onclick = () => {
@@ -136,7 +129,7 @@ searchInput.addEventListener("keydown", function (e) {
   }
 });
 
-// Lightbox
+// === Lightbox ===
 let currentIndex = 0;
 
 function openLightbox(i) {
@@ -172,103 +165,10 @@ document.getElementById("lightbox").onclick = function (e) {
   if (e.target === this) closeLightbox();
 };
 
-// Traducción multi-idioma
-const langSelect = document.getElementById("langSelect");
-const translations = {
-  es: {
-    title: "Yuniel'S Upholstery LLC",
-    models: "Modelos",
-    search: "Buscar",
-    about: "Sobre Nosotros",
-    aboutText:
-      "En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.",
-    services: "Nuestros Servicios",
-    service1: "✓ Tapicería para botes, yates y lanchas",
-    service2: "✓ Reemplazo de cojines y asientos",
-    service3: "✓ Costura personalizada y bordado",
-    service4: "✓ Reparaciones de vinilo, lona y cuero marino",
-    reviews: "Opiniones de Clientes",
-    review1:
-      '"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.',
-    review2:
-      '"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.',
-    contact: "Contáctanos",
-    name: "Tu nombre",
-    email: "Tu correo electrónico",
-    message: "Tu mensaje...",
-    send: "Enviar",
-    copyright: "© 2024 Yuniel'S Upholstery LLC. Todos los derechos reservados."
-  },
-  en: {
-    title: "Yuniel'S Upholstery LLC",
-    models: "Models",
-    search: "Search",
-    about: "About Us",
-    aboutText:
-      "At Yuniel's Upholstery LLC, we specialize in marine upholstery in Miami. With over 10 years of experience, we offer restoration and customization of marine interiors with high-quality materials.",
-    services: "Our Services",
-    service1: "✓ Upholstery for boats, yachts, and launches",
-    service2: "✓ Cushion and seat replacement",
-    service3: "✓ Custom sewing and embroidery",
-    service4: "✓ Vinyl, canvas, and marine leather repairs",
-    reviews: "Client Testimonials",
-    review1:
-      '"Impeccable work on my yacht. The finish is luxurious and delivered on time. Highly recommended!" – Carlos R.',
-    review2:
-      '"Very professional. The custom design exceeded my expectations." – Andrea M.',
-    contact: "Contact Us",
-    name: "Your name",
-    email: "Your email",
-    message: "Your message...",
-    send: "Send",
-    copyright: "© 2024 Yuniel'S Upholstery LLC. All rights reserved."
-  },
-  // Añade otros idiomas aquí si quieres...
+// === Idiomas ===
+document.getElementById("langSelect").onchange = function () {
+  const val = this.value;
+  if (val === "en") searchInput.placeholder = "Search model...";
+  else if (val === "pt") searchInput.placeholder = "Buscar modelo...";
+  else searchInput.placeholder = "Buscar modelo...";
 };
-
-// Aplicar traducción
-function applyLanguage(lang) {
-  const t = translations[lang] || translations.es;
-  document.querySelectorAll("[data-key]").forEach(el => {
-    const key = el.getAttribute("data-key");
-    if (t[key]) el.textContent = t[key];
-  });
-  const placeholders = ["searchInput", "name", "email", "message"];
-  placeholders.forEach(id => {
-    const el = document.getElementById(id) || document.querySelector(`[name='${id}']`);
-    if (el && t[id]) el.placeholder = t[id];
-  });
-  const sendBtn = document.querySelector("button[type='submit']");
-  if (sendBtn && t.send) sendBtn.textContent = t.send;
-}
-
-// Guardar selección idioma
-function saveLanguage(lang) {
-  try {
-    localStorage.setItem("selectedLang", lang);
-  } catch (e) {
-    // No hacer nada
-  }
-}
-
-// Obtener idioma guardado o por defecto
-function getSavedLanguage() {
-  try {
-    return localStorage.getItem("selectedLang") || "es";
-  } catch (e) {
-    return "es";
-  }
-}
-
-// Inicializar idioma al cargar la página
-if (langSelect) {
-  const savedLang = getSavedLanguage();
-  langSelect.value = savedLang;
-  applyLanguage(savedLang);
-
-  langSelect.onchange = () => {
-    const newLang = langSelect.value;
-    saveLanguage(newLang);
-    applyLanguage(newLang);
-  };
-} else
