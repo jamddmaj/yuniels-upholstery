@@ -1,102 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Yuniel'S Upholstery LLC</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <title>Yuniel'S Upholstery LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Yuniel'S Upholstery LLC</h1>
-    <select id="langSelect">
+    <select id="langSelect" aria-label="Seleccionar idioma">
       <option value="es">Español</option>
       <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ja">日本語</option>
+      <option value="zh">中文</option>
+      <option value="ar">العربية</option>
+      <!-- Puedes agregar más opciones aquí -->
     </select>
   </header>
 
   <main>
-    <!-- Contenido en Español -->
-    <section class="lang-es lang-section">
-      <h2>Sobre Nosotros</h2>
-      <p>En Yuniel's Upholstery LLC nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de alta calidad.</p>
+    <section>
+      <h2 data-key="aboutTitle">Sobre Nosotros</h2>
+      <p data-key="aboutText">En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.</p>
 
-      <h3>Nuestros Servicios</h3>
+      <h3 data-key="servicesTitle">Nuestros Servicios</h3>
       <ul>
-        <li>Tapicería para botes, yates y lanchas</li>
-        <li>Reemplazo de cojines y asientos</li>
-        <li>Costura personalizada y bordado</li>
-        <li>Reparaciones de vinilo, lona y cuero marino</li>
+        <li data-key="service1">Tapicería para botes, yates y lanchas</li>
+        <li data-key="service2">Reemplazo de cojines y asientos</li>
+        <li data-key="service3">Costura personalizada y bordado</li>
+        <li data-key="service4">Reparaciones de vinilo, lona y cuero marino</li>
       </ul>
 
-      <h3>Opiniones de Clientes</h3>
-      <blockquote>"Trabajo impecable en mi yate..." – Carlos R.</blockquote>
-      <blockquote>"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</blockquote>
+      <h3 data-key="reviewsTitle">Opiniones de Clientes</h3>
+      <blockquote data-key="review1">"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.</blockquote>
+      <blockquote data-key="review2">"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.</blockquote>
 
-      <h3>Contáctanos</h3>
+      <h3 data-key="contactTitle">Contáctanos</h3>
       <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="text" name="name" placeholder="Tu nombre" required />
-        <input type="email" name="email" placeholder="Tu correo electrónico" required />
-        <textarea name="message" placeholder="Tu mensaje..." required></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-
-    <!-- Contenido en Inglés -->
-    <section class="lang-en lang-section" style="display:none;">
-      <h2>About Us</h2>
-      <p>At Yuniel's Upholstery LLC, we specialize in marine upholstery in Miami. With over 10 years of experience, we offer restoration and customization of marine interiors with high-quality materials.</p>
-
-      <h3>Our Services</h3>
-      <ul>
-        <li>Upholstery for boats, yachts, and launches</li>
-        <li>Cushion and seat replacement</li>
-        <li>Custom sewing and embroidery</li>
-        <li>Vinyl, canvas, and marine leather repairs</li>
-      </ul>
-
-      <h3>Client Testimonials</h3>
-      <blockquote>"Impeccable work on my yacht..." – Carlos R.</blockquote>
-      <blockquote>"Very professional. The custom design exceeded my expectations." – Andrea M.</blockquote>
-
-      <h3>Contact Us</h3>
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <textarea name="message" placeholder="Your message..." required></textarea>
-        <button type="submit">Send</button>
+        <input type="text" name="name" placeholder="" data-key="namePlaceholder" required />
+        <input type="email" name="email" placeholder="" data-key="emailPlaceholder" required />
+        <textarea name="message" placeholder="" data-key="messagePlaceholder" required></textarea>
+        <button type="submit" data-key="sendButton">Enviar</button>
       </form>
     </section>
   </main>
 
   <script>
-    const langSelect = document.getElementById('langSelect');
-    const availableLangs = ['es', 'en'];
+    const translations = {
+      es: {
+        aboutTitle: "Sobre Nosotros",
+        aboutText: "En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.",
+        servicesTitle: "Nuestros Servicios",
+        service1: "Tapicería para botes, yates y lanchas",
+        service2: "Reemplazo de cojines y asientos",
+        service3: "Costura personalizada y bordado",
+        service4: "Reparaciones de vinilo, lona y cuero marino",
+        reviewsTitle: "Opiniones de Clientes",
+        review1: "\"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!\" – Carlos R.",
+        review2: "\"Muy profesionales. El diseño personalizado superó mis expectativas.\" – Andrea M.",
+        contactTitle: "Contáctanos",
+        namePlaceholder: "Tu nombre",
+        emailPlaceholder: "Tu correo electrónico",
+        messagePlaceholder: "Tu mensaje...",
+        sendButton: "Enviar"
+      },
+      en: {
+        aboutTitle: "About Us",
+        aboutText: "At Yuniel's Upholstery LLC, we specialize in marine upholstery in Miami. With over 10 years of experience, we offer restoration and customization of marine interiors with high-quality materials.",
+        servicesTitle: "Our Services",
+        service1: "Upholstery for boats, yachts, and launches",
+        service2: "Cushion and seat replacement",
+        service3: "Custom sewing and embroidery",
+        service4: "Vinyl, canvas, and marine leather repairs",
+        reviewsTitle: "Client Testimonials",
+        review1: "\"Impeccable work on my yacht. The finish is luxurious and delivered on time. Highly recommended!\" – Carlos R.",
+        review2: "\"Very professional. The custom design exceeded my expectations.\" – Andrea M.",
+        contactTitle: "Contact Us",
+        namePlaceholder: "Your name",
+        emailPlaceholder: "Your email",
+        messagePlaceholder: "Your message...",
+        sendButton: "Send"
+      },
+      pt: {
+        aboutTitle: "Sobre Nós",
+        aboutText: "Na Yuniel's Upholstery LLC, especializamo-nos em estofamento marinho em Miami. Com mais de 10 anos de experiência, oferecemos restauração e personalização de interiores marinhos com materiais de alta qualidade.",
+        servicesTitle: "Nossos Serviços",
+        service1: "Estofamento para barcos, iates e lanchas",
+        service2: "Substituição de almofadas e assentos",
+        service3: "Costura personalizada e bordado",
+        service4: "Reparos em vinil, lona e couro marinho",
+        reviewsTitle: "Depoimentos de Clientes",
+        review1: "\"Trabalho impecável no meu iate. O acabamento é de luxo e entregue no prazo. Altamente recomendado!\" – Carlos R.",
+        review2: "\"Muito profissionais. O design personalizado superou minhas expectativas.\" – Andrea M.",
+        contactTitle: "Contate-Nos",
+        namePlaceholder: "Seu nome",
+        emailPlaceholder: "Seu email",
+        messagePlaceholder: "Sua mensagem...",
+        sendButton: "Enviar"
+      },
+      // Puedes añadir más idiomas siguiendo esta estructura
+    };
 
-    function showLanguage(lang) {
-      availableLangs.forEach(l => {
-        document.querySelectorAll('.lang-' + l).forEach(el => {
-          el.style.display = (l === lang) ? '' : 'none';
-        });
+    const langSelect = document.getElementById('langSelect');
+
+    function applyTranslations(lang) {
+      const texts = translations[lang] || translations.es;
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if(texts[key]) {
+          if(el.placeholder !== undefined) {
+            el.placeholder = texts[key];
+          } else {
+            el.textContent = texts[key];
+          }
+        }
       });
     }
 
     function saveLang(lang) {
-      try { localStorage.setItem('lang', lang); } catch {}
+      try {
+        localStorage.setItem('lang', lang);
+      } catch {}
     }
 
-    function getSavedLang() {
-      try { return localStorage.getItem('lang') || 'es'; } catch { return 'es'; }
+    function getLang() {
+      try {
+        return localStorage.getItem('lang') || 'es';
+      } catch {
+        return 'es';
+      }
     }
 
-    const savedLang = getSavedLang();
-    langSelect.value = savedLang;
-    showLanguage(savedLang);
+    langSelect.value = getLang();
+    applyTranslations(langSelect.value);
 
     langSelect.addEventListener('change', () => {
-      const lang = langSelect.value;
-      showLanguage(lang);
-      saveLang(lang);
+      const selectedLang = langSelect.value;
+      applyTranslations(selectedLang);
+      saveLang(selectedLang);
     });
   </script>
 </body>
