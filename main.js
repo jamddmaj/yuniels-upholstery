@@ -38,8 +38,8 @@ const galleryData = {
     "gallery/northtech/IMG-20250226-WA0024.jpg",
     "gallery/northtech/IMG-20250226-WA0026.jpg",
     "gallery/northtech/IMG-20250226-WA0027.jpg",
-    "foto1.jpg",
-    "foto2.jpg"
+    "gallery/northtech/foto1.jpg",
+    "gallery/northtech/foto2.jpg"
   ],
   yellowfin42: [
     "gallery/yellowfin42/foto3.png.jpg"
