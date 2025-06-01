@@ -11,12 +11,10 @@ menuBtn.onclick = e => {
 closeSidebar.onclick = () => sidebar.classList.remove("open");
 
 document.addEventListener("click", e => {
-  if (
-    sidebar.classList.contains("open") &&
-    !sidebar.contains(e.target) &&
-    e.target !== menuBtn &&
-    !menuBtn.contains(e.target)
-  ) {
+  if (sidebar.classList.contains("open") &&
+      !sidebar.contains(e.target) &&
+      e.target !== menuBtn &&
+      !menuBtn.contains(e.target)) {
     sidebar.classList.remove("open");
   }
 });
@@ -36,29 +34,37 @@ document.querySelectorAll(".accordion").forEach(btn => {
 // === Galería de imágenes ===
 const galleryData = {
   northtech: [
-    "gallery/northtech/IMG-20250226-WA0023.jpg",
-    "gallery/northtech/IMG-20250226-WA0024.jpg",
-    "gallery/northtech/IMG-20250226-WA0026.jpg",
-    "gallery/northtech/IMG-20250226-WA0027.jpg"
+    "gallery/northtech/foto1.jpg",
+    "gallery/northtech/foto2.jpg",
+    "gallery/northtech/foto3.jpg",
+    "gallery/northtech/foto4.jpg",
+    "gallery/northtech/foto5.jpg",
+    "gallery/northtech/foto6.jpg",
+    "gallery/northtech/foto7.jpg",
+    "gallery/northtech/foto8.jpg",
+    "gallery/northtech/foto9.jpg",
+    "gallery/northtech/foto10.jpg"
   ],
-  yellowfin42: ["gallery/yellowfin42/IMG20250403123239.jpg"],
-  yellowfin36: [],
-  "225 conquest": [],
-  "360 outrage": []
+  yellowfin42: [
+    "gallery/yellowfin42/foto1.jpg",
+    "gallery/yellowfin42/foto2.jpg",
+    "gallery/yellowfin42/foto3.jpg",
+    "gallery/yellowfin42/foto4.jpg",
+    "gallery/yellowfin42/foto5.jpg"
+  ],
+  yellowfin36: []
 };
 
 let suggestions = Object.keys(galleryData);
 let searchHistory = [];
 const galleryEl = document.getElementById("gallery");
-let currentImages = [],
-  currentModel = "";
+let currentImages = [], currentModel = "";
 
 // Renderizar galería
 function renderGallery(images) {
   galleryEl.innerHTML = "";
   if (!images.length) {
-    galleryEl.innerHTML =
-      '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
+    galleryEl.innerHTML = '<div style="color:#b6eaff; padding: 22px;">No hay imágenes para este modelo.</div>';
     return;
   }
   images.forEach((src, i) => {
@@ -78,19 +84,16 @@ const suggestionsBox = document.getElementById("suggestions");
 
 searchInput.addEventListener("input", function () {
   const val = this.value.trim().toLowerCase();
-  if (!val) return (suggestionsBox.style.display = "none");
+  if (!val) return suggestionsBox.style.display = "none";
   let matches = suggestions.concat(searchHistory).filter(item => item.includes(val));
   matches = [...new Set(matches)];
-  if (!matches.length) return (suggestionsBox.style.display = "none");
-  suggestionsBox.innerHTML = matches
-    .map(m => `<div class="suggestion-item">${m}</div>`)
-    .join("");
+  if (!matches.length) return suggestionsBox.style.display = "none";
+  suggestionsBox.innerHTML = matches.map(m => `<div class="suggestion-item">${m}</div>`).join("");
   suggestionsBox.style.display = "block";
   document.querySelectorAll(".suggestion-item").forEach(item => {
     item.onclick = () => {
       searchInput.value = item.textContent;
       suggestionsBox.style.display = "none";
-      buscar(item.textContent);
     };
   });
 });
@@ -162,57 +165,10 @@ document.getElementById("lightbox").onclick = function (e) {
   if (e.target === this) closeLightbox();
 };
 
-// === Traducción multi-idioma ===
-const langSelect = document.getElementById("langSelect");
-
-const translations = {
-  es: {
-    title: "Yuniel'S Upholstery LLC",
-    models: "Modelos",
-    search: "Buscar",
-    aboutUs: "Sobre Nosotros",
-    aboutText:
-      "En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.",
-    services: "Nuestros Servicios",
-    service1: "✓ Tapicería para botes, yates y lanchas",
-    service2: "✓ Reemplazo de cojines y asientos",
-    service3: "✓ Costura personalizada y bordado",
-    service4: "✓ Reparaciones de vinilo, lona y cuero marino",
-    reviews: "Opiniones de Clientes",
-    review1:
-      '"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. Recomendado al 100%!" – Carlos R.',
-    review2:
-      '"Muy profesionales. El diseño personalizado superó mis expectativas." – Andrea M.',
-    contact: "Contáctanos",
-    name: "Tu nombre",
-    email: "Tu correo electrónico",
-    message: "Tu mensaje...",
-    send: "Enviar"
-  },
-  en: {
-    title: "Yuniel'S Upholstery LLC",
-    models: "Models",
-    search: "Search",
-    aboutUs: "About Us",
-    aboutText:
-      "At Yuniel's Upholstery LLC, we specialize in marine upholstery in Miami. With over 10 years of experience, we offer restoration and customization of marine interiors with high-quality materials.",
-    services: "Our Services",
-    service1: "✓ Upholstery for boats, yachts, and launches",
-    service2: "✓ Cushion and seat replacement",
-    service3: "✓ Custom sewing and embroidery",
-    service4: "✓ Vinyl, canvas, and marine leather repairs",
-    reviews: "Client Testimonials",
-    review1:
-      '"Impeccable work on my yacht. The finish is luxurious and delivered on time. Highly recommended!" – Carlos R.',
-    review2:
-      '"Very professional. The custom design exceeded my expectations." – Andrea M.',
-    contact: "Contact Us",
-    name: "Your name",
-    email: "Your email",
-    message: "Your message...",
-    send: "Send"
-  },
-  // Puedes agregar más idiomas aquí de forma similar
+// === Idiomas ===
+document.getElementById("langSelect").onchange = function () {
+  const val = this.value;
+  if (val === "en") searchInput.placeholder = "Search model...";
+  else if (val === "pt") searchInput.placeholder = "Buscar modelo...";
+  else searchInput.placeholder = "Buscar modelo...";
 };
-
-function applyLanguage(lang)
