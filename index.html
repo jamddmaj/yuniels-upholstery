@@ -9,6 +9,11 @@
   <link href="style.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="icons/logo-boat.png">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    if (window.location.pathname.startsWith('/admin')) {
+      window.location.href = '/admin/index.html';
+    }
+  </script>
   <script src="main.js" defer></script>
 </head>
 <body data-lang="es">
@@ -24,21 +29,8 @@
   <nav class="sidebar" id="sidebar">
     <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
     <h2 data-key="sidebarTitle">Modelos</h2>
-    <button class="accordion">Northtech <span>▼</span></button>
-    <div class="panel">
-      <a href="#" onclick="buscar('northtech')">Northtech 38</a>
-      <a href="#" onclick="buscar('northtech')">Northtech 45</a>
-    </div>
-    <button class="accordion">Yellowfin <span>▼</span></button>
-    <div class="panel">
-      <a href="#" onclick="buscar('yellowfin42')">Yellowfin 42</a>
-      <a href="#" onclick="buscar('yellowfin36')">Yellowfin 36</a>
-    </div>
-    <button class="accordion">Boston Whaler <span>▼</span></button>
-    <div class="panel">
-      <a href="#" onclick="buscar('225 conquest')">225 Conquest</a>
-      <a href="#" onclick="buscar('360 outrage')">360 Outrage</a>
-    </div>
+    <div id="sidebar-models">
+        </div>
   </nav>
 
   <main class="main-content">
@@ -99,15 +91,9 @@
   </main>
 
   <div class="social-fab">
-    <a href="https://wa.me/qr/AUNXTSBF2HG4A1" target="_blank" class="social-btn" title="WhatsApp">
-      <img src="icons/whatsapp.png" alt="WhatsApp">
-    </a>
-    <a href="https://www.instagram.com/jamd_dmaj?igsh=Y2VzZ2Nkd3M2em1n" target="_blank" class="social-btn" title="Instagram">
-      <img src="icons/instagram.png" alt="Instagram">
-    </a>
-    <a href="https://facebook.com/tu-usuario-de-facebook" target="_blank" class="social-btn" title="Facebook">
-      <img src="icons/facebook.png" alt="Facebook">
-    </a>
+    <a href="https://wa.me/qr/AUNXTSBF2HG4A1" target="_blank" class="social-btn" title="WhatsApp"><img src="icons/whatsapp.png" alt="WhatsApp"></a>
+    <a href="https://www.instagram.com/jamd_dmaj?igsh=Y2VzZ2Nkd3M2em1n" target="_blank" class="social-btn" title="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
+    <a href="https://facebook.com/tu-usuario-de-facebook" target="_blank" class="social-btn" title="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
   </div>
 
   <div id="lightbox" class="lightbox">
