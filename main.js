@@ -206,8 +206,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Galería y Búsqueda
-  const galleryData = { "northtech": ["gallery/northtech/foto1.jpg"], "yellowfin42": ["gallery/yellowfin42/foto1.jpg"], "yellowfin36": [], "225 conquest": [], "360 outrage": [] };
+  // --- GALERÍA Y BÚSQUEDA ---
+  // CORRECCIÓN: Objeto galleryData restaurado con TODAS tus imágenes
+  const galleryData = {
+    "northtech": [
+      "gallery/northtech/foto1.jpg", "gallery/northtech/foto2.jpg", "gallery/northtech/foto3.jpg", 
+      "gallery/northtech/foto4.jpg", "gallery/northtech/foto5.jpg", "gallery/northtech/foto6.jpg", 
+      "gallery/northtech/foto7.jpg", "gallery/northtech/foto8.jpg", "gallery/northtech/foto9.jpg", 
+      "gallery/northtech/foto10.jpg"
+    ],
+    "northtech 38": [
+      "gallery/northtech/foto1.jpg", "gallery/northtech/foto2.jpg", "gallery/northtech/foto3.jpg"
+    ],
+    "northtech 45": [
+      "gallery/northtech/foto4.jpg", "gallery/northtech/foto5.jpg"
+    ],
+    "yellowfin42": [
+      "gallery/yellowfin42/foto1.jpg", "gallery/yellowfin42/foto2.jpg", "gallery/yellowfin42/foto3.jpg", 
+      "gallery/yellowfin42/foto4.jpg", "gallery/yellowfin42/foto5.jpg"
+    ],
+    "yellowfin 36": [],
+    "225 conquest": [],
+    "360 outrage": []
+  };
+
   const suggestions = Object.keys(galleryData);
   const galleryEl = document.getElementById("gallery");
   const searchInput = document.getElementById("searchInput");
@@ -232,10 +254,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.buscar = function(modelo) {
     const searchTerm = (modelo || searchInput.value.trim()).toLowerCase();
     if (!searchTerm) return;
-    const images = galleryData[searchTerm] || [];
-    renderGallery(images, searchTerm);
+    
+    // Al buscar, actualiza el estado actual para el lightbox
+    currentImages = galleryData[searchTerm] || [];
+    renderGallery(currentImages, searchTerm);
+    
     searchInput.value = searchTerm;
-    sidebar.classList.remove("open");
+    sidebar.classList.remove("open"); // Cierra el menú al seleccionar un modelo
   };
 
   document.getElementById("searchForm").onsubmit = e => { e.preventDefault(); window.buscar(); };
@@ -244,11 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxCounter = document.getElementById("lightboxCounter");
-  let currentImages = [];
+  let currentImages = []; // El estado se actualiza en la función buscar()
   let currentIndex = 0;
 
   function openLightbox(i, images) {
-    currentImages = images;
+    currentImages = images; // Asegurarse de que el lightbox usa las imágenes correctas
     currentIndex = i;
     showLightbox();
   }
@@ -257,7 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!currentImages.length) return;
     lightboxImg.src = currentImages[currentIndex];
     lightbox.classList.add("open");
-    // Usamos la función de traducción para el contador
     lightboxCounter.textContent = translations[currentLang].lightboxCounter(currentIndex + 1, currentImages.length);
   }
 
@@ -271,13 +295,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- INICIALIZACIÓN DE IDIOMA ---
   langSelect.addEventListener("change", (e) => setLanguage(e.target.value));
 
-  // Comprueba si el usuario ya tiene un idioma guardado
   const savedLang = localStorage.getItem('userLanguage');
-  // O detecta el idioma del navegador
   const browserLang = navigator.language.split('-')[0];
-
-  // Establece el idioma final (guardado > navegador > por defecto 'es')
   const initialLang = savedLang || (translations[browserLang] ? browserLang : 'es');
+  
   langSelect.value = initialLang;
   setLanguage(initialLang);
 });
