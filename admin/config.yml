@@ -1,23 +1,23 @@
 backend:
   name: git-gateway
-  branch: main # O 'master', dependiendo de tu rama principal
+  branch: main # O 'master', si esa es tu rama principal
 
-media_folder: "gallery" # Dónde se guardarán las imágenes que subas
-public_folder: "/gallery" # Cómo se accederá a las imágenes desde la web
+media_folder: "gallery"
+public_folder: "/gallery"
 
 collections:
-  - name: "trabajos" # Nombre de la colección
-    label: "Trabajos de Tapicería" # Nombre que verás en el panel
-    folder: "src/gallery" # La carpeta donde se guardan los datos
-    create: true # Permite crear nuevas entradas
-    slug: "{{id}}" # El nombre del archivo se basará en el campo 'id'
-    extension: "json" # Guardará los archivos como .json
-    fields: # Los campos que verás en el formulario de administración
+  - name: "trabajos"
+    label: "Trabajos de Tapicería"
+    folder: "src/gallery"
+    create: true
+    slug: "{{id}}"
+    extension: "json"
+    fields:
       - { label: "Nombre del Modelo", name: "title", widget: "string" }
       - { label: "Identificador (ID único, en minúsculas, sin espacios)", name: "id", widget: "string" }
       - label: "Imágenes del Trabajo"
         name: "images"
         widget: "list"
-        summary: "{{fields.image}}"
+        summary: "{{fields.image}}" # Muestra un resumen de la imagen en la lista
         field: { label: "Imagen", name: "image", widget: "image" }
-
+        
