@@ -1,1 +1,16 @@
-
+{
+  "title": "Northtech",
+  "id": "northtech",
+  "images": [
+    "gallery/northtech/foto1.jpg",
+    "gallery/northtech/foto2.jpg",
+    "gallery/northtech/foto3.jpg",
+    "gallery/northtech/foto4.jpg",
+    "gallery/northtech/foto5.jpg",
+    "gallery/northtech/foto6.jpg",
+    "gallery/northtech/foto7.jpg",
+    "gallery/northtech/foto8.jpg",
+    "gallery/northtech/foto9.jpg",
+    "gallery/northtech/foto10.jpg"
+  ]
+}
