@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main # O 'master', si esa es tu rama principal
+  branch: main
 
 media_folder: "gallery"
 public_folder: "/gallery"
@@ -18,6 +18,6 @@ collections:
       - label: "Imágenes del Trabajo"
         name: "images"
         widget: "list"
-        summary: "{{fields.image}}" # Muestra un resumen de la imagen en la lista
+        summary: "{{fields.image}}"
         field: { label: "Imagen", name: "image", widget: "image" }
         
