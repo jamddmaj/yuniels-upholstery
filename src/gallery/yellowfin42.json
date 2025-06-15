@@ -1,1 +1,11 @@
-
+{
+  "title": "Yellowfin 42",
+  "id": "yellowfin42",
+  "images": [
+    "gallery/yellowfin42/foto1.jpg",
+    "gallery/yellowfin42/foto2.jpg",
+    "gallery/yellowfin42/foto3.jpg",
+    "gallery/yellowfin42/foto4.jpg",
+    "gallery/yellowfin42/foto5.jpg"
+  ]
+}
