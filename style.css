@@ -527,3 +527,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     height: 45px;
   }
 }
+/* --- Estilos para Modelos de Sidebar Dinámicos --- */
+.sidebar-model-link {
+  display: block;
+  padding: 12px 22px;
+  color: #b6eaff;
+  text-decoration: none;
+  font-size: 16px;
+  border-bottom: 1px solid #232a39;
+}
+
+.sidebar-model-link:hover {
+  background: hsla(188, 65%, 50%, 0.13);
+  color: #2ab7ca;
+}
