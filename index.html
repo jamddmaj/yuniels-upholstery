@@ -2,18 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Tapicería para Barcos en Miami | Yuniel'S Upholstery LLC</title>
-  
+  <title>Yuniel'S Upholstery LLC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <meta name="description" content="Servicio profesional de tapicería para barcos, yates y lanchas en Miami. Especialistas en modelos Northtech, Yellowfin y Boston Whaler. Pide tu presupuesto gratis.">
+  <meta name="description" content="Servicio profesional de tapicería para barcos, yates y lanchas en Miami. Pide tu presupuesto gratis.">
   
   <link href="style.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="icons/logo-boat.png">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <script src="main.js" defer></script>
 </head>
-<body>
+<body data-lang="es">
 
   <header class="header-row">
     <button class="menu-btn" id="menuBtn" aria-label="Menú principal">
@@ -25,7 +23,7 @@
 
   <nav class="sidebar" id="sidebar">
     <button class="close-sidebar" id="closeSidebar" title="Cerrar menú">&times;</button>
-    <h2>Modelos</h2>
+    <h2 data-key="sidebarTitle">Modelos</h2>
     <button class="accordion">Northtech <span>▼</span></button>
     <div class="panel">
       <a href="#" onclick="buscar('northtech')">Northtech 38</a>
@@ -45,11 +43,15 @@
 
   <main class="main-content">
     <form id="searchForm" class="search-row" autocomplete="off">
-      <input type="text" id="searchInput" placeholder="Buscar modelo..." />
-      <button type="submit">Buscar</button>
-      <select id="langSelect">
+      <input type="text" id="searchInput" data-key="searchPlaceholder" placeholder="Buscar modelo..." />
+      <button type="submit" data-key="searchButton">Buscar</button>
+      <select id="langSelect" title="Seleccionar idioma">
         <option value="es">Español</option>
         <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+        <option value="it">Italiano</option>
+        <option value="de">Deutsch</option>
       </select>
       <div id="suggestions" class="suggestions-list"></div>
     </form>
@@ -57,41 +59,41 @@
     <div id="gallery" class="gallery-grid"></div>
 
     <section id="about" class="info-section">
-      <h2>Sobre Nosotros</h2>
-      <p>
+      <h2 data-key="aboutTitle">Sobre Nosotros</h2>
+      <p data-key="aboutParagraph">
         En Yuniel's Upholstery LLC, nos especializamos en tapicería para embarcaciones en Miami. Con más de 10 años de experiencia, ofrecemos restauración y personalización de interiores marinos con materiales de la más alta calidad.
       </p>
     </section>
 
     <section id="services" class="info-section dark-bg">
-      <h2 data-key="services">Nuestros Servicios</h2>
+      <h2 data-key="servicesTitle">Nuestros Servicios</h2>
       <ul>
-        <li>✓ Tapicería para botes, yates y lanchas</li>
-        <li>✓ Reemplazo de cojines y asientos</li>
-        <li>✓ Costura personalizada y bordado</li>
-        <li>✓ Reparaciones de vinilo, lona y cuero marino</li>
+        <li data-key="service1">✓ Tapicería para botes, yates y lanchas</li>
+        <li data-key="service2">✓ Reemplazo de cojines y asientos</li>
+        <li data-key="service3">✓ Costura personalizada y bordado</li>
+        <li data-key="service4">✓ Reparaciones de vinilo, lona y cuero marino</li>
       </ul>
     </section>
 
     <section id="reviews" class="info-section">
-      <h2 data-key="reviews">Opiniones de Clientes</h2>
+      <h2 data-key="reviewsTitle">Opiniones de Clientes</h2>
       <blockquote class="testimonial">
-        <p>"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. ¡Recomendado al 100%!"</p>
+        <p data-key="testimonial1">"Trabajo impecable en mi yate. El acabado es de lujo y entregado a tiempo. ¡Recomendado al 100%!"</p>
         <footer>– Carlos R.</footer>
       </blockquote>
       <blockquote class="testimonial">
-        <p>"Muy profesionales. El diseño personalizado superó mis expectativas."</p>
+        <p data-key="testimonial2">"Muy profesionales. El diseño personalizado superó mis expectativas."</p>
         <footer>– Andrea M.</footer>
       </blockquote>
     </section>
 
     <section id="contact" class="info-section dark-bg">
-      <h2 data-key="contact">Contáctanos</h2>
+      <h2 data-key="contactTitle">Contáctanos</h2>
       <form action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" class="contact-form">
-        <input type="text" name="name" placeholder="Tu nombre" required>
-        <input type="email" name="email" placeholder="Tu correo electrónico" required>
-        <textarea name="message" placeholder="Tu mensaje..." rows="5" required></textarea>
-        <button type="submit">Enviar Mensaje</button>
+        <input type="text" name="name" data-key="formName" placeholder="Tu nombre" required>
+        <input type="email" name="email" data-key="formEmail" placeholder="Tu correo electrónico" required>
+        <textarea name="message" data-key="formMessage" placeholder="Tu mensaje..." rows="5" required></textarea>
+        <button type="submit" data-key="formSend">Enviar Mensaje</button>
       </form>
     </section>
   </main>
@@ -110,16 +112,16 @@
 
   <div id="lightbox" class="lightbox">
     <div class="lightbox-img-wrapper">
-      <button class="lightbox-btn prev" id="lightboxPrev" title="Anterior">&#8678;</button>
+      <button class="lightbox-btn prev" id="lightboxPrev" data-key="lightboxPrev" title="Anterior">&#8678;</button>
       <img id="lightboxImg" class="lightbox-img" src="" alt="Foto de tapicería ampliada" />
-      <button class="lightbox-btn next" id="lightboxNext" title="Siguiente">&#8594;</button>
+      <button class="lightbox-btn next" id="lightboxNext" data-key="lightboxNext" title="Siguiente">&#8594;</button>
       <button class="lightbox-close" id="lightboxClose" title="Cerrar">&times;</button>
     </div>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 
   <footer class="copyright">
-    <p>© 2025 Yuniel'S Upholstery LLC. Todos los derechos reservados.</p>
+    <p data-key="copyright">© 2025 Yuniel'S Upholstery LLC. Todos los derechos reservados.</p>
   </footer>
 
 </body>
